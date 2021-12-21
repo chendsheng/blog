@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onestep.dao.CategoryMapper">
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from category
+    </select>
+
+    <select id="selectCategories" resultType="com.onestep.entity.Category">
+        select * from category
+    </select>
+
+
+    <select id="selectCategoryList" resultType="Category">
+        select * from category
+        <where>
+            <if test="column=='name' and value!=null">
+                ${column} like concat('%',#{value},'%')
+            </if>
+            <if test="column=='id' and value!=null">
+                ${column} = #{value}
+            </if>
+        </where>
+    </select>
+    <select id="selectCategoryByName" resultType="com.onestep.entity.Category">
+        select * from category where name = #{name}
+    </select>
+
+    <insert id="insertCategory" useGeneratedKeys="true" keyProperty="id">
+        insert into category(name, icon) VALUES (#{name},#{icon})
+    </insert>
+
+    <update id="updateCategory">
+        update category
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="icon != null">
+                icon = #{icon}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <delete id="batchDeleteCategoryById">
+        delete from category where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

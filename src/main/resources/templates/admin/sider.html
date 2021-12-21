@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">>
+<head>
+</head>
+
+<body>
+<div class="container-fluid h-100 d-flex">
+    <div th:fragment="sider(path,admin)" class="side bg-dark position-relative">
+
+        <div class="t0">
+            <span>my blog</span>
+        </div>
+
+        <div class="t1">
+            <div class="profile">
+                <img th:src="${admin==null or admin.photo==null}?@{/admin/img/user/favicon.ico}:@{${admin.photo}}" alt="">
+                <span th:text="${admin.name}">杉桐</span>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column p-2 text-left">
+            <span class="mt-5 module">Dashboard</span>
+
+            <a th:href="@{/admin/index}" class="btn" th:classappend="${path=='index'}?active">
+                <img src="../icon/dashboard.png" th:src="@{/icon/dashboard.png}" class="icon" alt="">
+                <span>仪表盘</span>
+            </a>
+            <a th:href="@{/admin/edit}" class="btn" th:classappend="${path=='edit'}?active">
+                <img src="../icon/edit.png" th:src="@{/icon/edit.png}" class="icon" alt="">
+                <span>发布博客</span>
+            </a>
+
+            <span class="mt-5 module">管理模块</span>
+            <a th:href="@{/admin/article}" class="btn" th:classappend="${path=='blog'}?active">
+                <img src="../icon/blog.png" th:src="@{/icon/blog.png}" class="icon" alt="">
+                <span>博客管理</span>
+            </a>
+            <a th:href="@{/admin/tag}" class="btn" th:classappend="${path=='tag'}?active">
+                <img src="../icon/category.png" th:src="@{/icon/tag.png}" class="icon" alt="">
+                <span>标签管理</span>
+            </a>
+            <a th:href="@{/admin/category}" class="btn" th:classappend="${path=='category'}?active">
+                <img src="../icon/tag.png" th:src="@{/icon/category.png}" class="icon" alt="">
+                <span>分类管理</span>
+            </a>
+            <span class="mt-5 module">系统管理</span>
+            <a th:href="@{/admin/system}" class="btn" th:classappend="${path=='system'}?active">
+                <img src="../icon/admin.png" th:src="@{/icon/admin.png}" class="icon" alt="">
+                <span>管理员</span>
+            </a>
+            <input type="hidden" th:href="${#servletContext.getContextPath()}" id="realPath">
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

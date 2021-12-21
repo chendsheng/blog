@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/admin::head('公共管理_仪表盘')">
+</head>
+<link rel="stylesheet" th:href="@{/admin/css/common.css}">
+<link rel="stylesheet" th:href="@{/admin/css/index.css}">
+
+<body>
+<div class="h-100 d-flex">
+    <div th:replace="admin/sider::sider('index',${admin})"></div>
+
+    <div class="main flex-grow-1 d-flex flex-column">
+        <div class="d-flex flex-column warper">
+            <div th:replace="admin/header::header(${admin})"></div>
+
+            <div class="flex-grow-1 p-2">
+                <div class="index">
+                    <div class="container-fluid dashboard">
+                        <div class="allin pl-2 pt-1 pr-2">
+                            <div class="head  mt-5 mb-5 pb-2">
+                                <h5 class="ml-3">管理首页</h5>
+                            </div>
+
+                            <div class="row text-white">
+
+                                <!-- 新增博客 -->
+                                <div class="col-lg-4 col-6 p-1">
+                                    <div class="bg-info rounded position-relative">
+                                        <div class="d-flex justify-content-between p-2">
+                                            <div class="inner pb-5">
+                                                <h2>新增博客</h2>
+                                                <p>随笔记录</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img src="../icon-black/edit.png" th:src="@{/icon-black/edit.png}" alt="">
+                                            </div>
+                                        </div>
+                                        <a th:href="@{/admin/edit}" class="text-center p-2">
+                                            <span class="text-white">let's go</span>
+                                            <img src="../icon/right.png" th:src="@{/icon/right.png}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!--文章-->
+                                <div class="col-lg-4 col-6 p-1">
+                                    <div class="bg-success rounded position-relative">
+                                        <div class="d-flex justify-content-between p-2">
+                                            <div class="inner pb-5">
+                                                <h2 th:text="${articleCount}">15</h2>
+                                                <p>文章数量</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img src="../icon-black/blog.png" th:src="@{/icon-black/blog.png}" alt="">
+                                            </div>
+                                        </div>
+                                        <a href="#" class="text-center p-2">
+                                            <span class="text-white">More info</span>
+                                            <img src="../icon/right.png" th:src="@{/icon/right.png}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+
+      <!--                          &lt;!&ndash;评论&ndash;&gt;
+                                <div class="col-lg-4 col-6 p-1">
+                                    <div class="bg-primary rounded position-relative">
+                                        <div class="d-flex justify-content-between p-2">
+                                            <div class="inner pb-5">
+                                                <h2 th:text="0">98</h2>
+                                                <p>评论数量</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img src="../icon-black/blog.png" th:src="@{/icon-black/comment.png}" alt="">
+                                            </div>
+                                        </div>
+                                        <a th:href="@{/admin/comment}" class="text-center p-2">
+                                            <span class="text-white">More info</span>
+                                            <img src="../icon/right.png" th:src="@{/icon/right.png}" alt="">
+                                        </a>
+                                    </div>
+                                </div>-->
+
+                                <!-- 分类 -->
+                                <div class="col-lg-4 col-6 p-1">
+                                    <div class="bg-warning rounded position-relative">
+                                        <div class="d-flex justify-content-between p-2">
+                                            <div class="inner pb-5">
+                                                <h2 th:text="${categoryCount}">12</h2>
+                                                <p>分类数量</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img src="../icon-black/blog.png" th:src="@{/icon-black/category.png}" alt="">
+                                            </div>
+                                        </div>
+                                        <a href="@{/admin/category}" class="text-center p-2">
+                                            <span class="text-white">More info</span>
+                                            <img src="../icon/right.png" th:src="@{/icon/right.png}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- 标签 -->
+                                <div class="col-lg-4 col-6 p-1">
+                                    <div class="bg-danger rounded position-relative">
+                                        <div class="d-flex justify-content-between p-2">
+                                            <div class="inner pb-5">
+                                                <h2 th:text="${tagCount}">66</h2>
+                                                <p>标签数量</p>
+                                            </div>
+                                            <div class="icon">
+                                                <img src="../icon-black/blog.png" th:src="@{/icon-black/tag.png}" alt="">
+                                            </div>
+                                        </div>
+                                        <a href="@{/admin/tag}" class="text-center p-2">
+                                            <span class="text-white">More info</span>
+                                            <img src="../icon/right.png" th:src="@{/icon/right.png}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="admin/footer::footer">
+            学而不思则罔，思而不学则殆！
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/admin/js/sider.js}"></script>
+<script>
+    $(function () {
+        $(".index .row>div>div").mouseenter(function () {
+            $(this).find(".icon img").stop().animate({ width: '100px', height: '100px' }, '2s')
+        })
+        $(".index .row>div>div").mouseleave(function () {
+            $(this).find(".icon img").stop().animate({ width: '90px', height: '90px' }, '2s')
+        })
+    })
+</script>
+</html>

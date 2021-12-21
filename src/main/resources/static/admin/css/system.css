@@ -1,0 +1,41 @@
+.system{
+    min-height: 1080px;
+}
+.system .admin img{
+    width: 18px;
+    height: 18px;
+    vertical-align: sub;
+    transform: translateY(-7%);
+}
+.system .admin .user-list img{
+    width: 30px;
+    height: 30px;
+}
+tr>td,tr>th{
+    vertical-align: middle;
+}
+.admin,.links{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 5px 10px ;
+    background-color: gainsboro;
+}
+h5{
+    padding: 10px;
+}
+.body{
+    background-color: white;
+    padding: 10px 10px;
+    border-radius: 5px;
+}
+.links .body>span{
+    border:1px solid gainsboro;
+    padding: 5px;
+}
+.user-list{
+    max-height: 800px;
+    overflow: auto;
+}
+.modal-dialog{
+    margin-top: 15%;
+}

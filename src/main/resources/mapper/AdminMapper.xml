@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onestep.dao.AdminMapper">
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from admin
+    </select>
+    <select id="selectAdmins" resultType="admin">
+        select * from admin
+    </select>
+    <select id="selectRole" resultType="java.lang.String">
+        select role from admin where name = #{name}
+    </select>
+    <select id="selectAdmin" resultType="com.onestep.entity.Admin">
+        select * from admin where name = #{name}
+    </select>
+    <insert id="insertAdmin"  useGeneratedKeys="true" keyProperty="id">
+        insert into admin
+        <trim suffix=")" prefix="(" suffixOverrides=",">
+            <if test="photo != null">
+                photo,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="role != null">
+                role,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="photo != null">
+                #{photo},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="role != null">
+                #{role},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateAdminbyId">
+        update admin
+        <set>
+            <if test="photo != null">
+                photo = #{photo},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="role != null">
+                role = #{role},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="batchDeleteAdminbyIds">
+        delete from admin
+        where id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dds的个人博客</title>
+    <link rel="stylesheet" th:href="@{/front/css/index.css}">
+    <link rel="stylesheet" th:href="@{/front/css/pager.css}">
+    <link rel="stylesheet" th:href="@{/front/css/footer.css}">
+    <link rel="shortcut icon" th:href="@{/favicon/favicon.ico}">
+</head>
+
+<body>
+<!-- 导航栏 -->
+<div class="header" th:fragment="header">
+    <input type="hidden" id="realPath" th:href="${#servletContext.getContextPath()}">
+    <div class="wrapper">
+        <div class="nav">
+            <div class="lnv">
+                <a th:href="@{/}" id="home">主页</a>
+                <a th:href="@{'/?article=all'}" id="note">文章</a>
+                <a th:href="@{/admin}" id="collection">管理</a>
+            </div>
+            <div class="rnv">
+                <a th:href="@{/space}" id="about">关于我</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="pic" th:if="${pic!=null}?${pic}:true">
+    <img th:data-src="@{/front/img/index.jpg}" src="" alt="">
+    <div class="down">
+    </div>
+</div>-->
+
+<!--备用search-->
+<div class="search-bak">
+    <div class="search" id="bak">
+        <input id="title_search" type="text"  class="form-input" placeholder="请输入要搜索的文章">
+        <button>
+            搜索
+        </button>
+    </div>
+</div>
+
+<div class="container" id="container">
+    <!-- 内容展示 -->
+    <div class="content">
+        <!-- 左侧文章 -->
+        <div class="blog-list left">
+            <div id="blogsList">
+                <div class="blog-wrapper" th:fragment="articlesList" th:count="${pageInfo.pages}" th:selectType="${selectType}" th:selectValue="${selectValue}">
+                    <div class="error" th:if="${articleDetails.size()==0}">
+                        相关文章记录为空
+                    </div>
+                    <div class="blog-item" th:each="articleDetail:${articleDetails}" th:blogId="${articleDetail.id}">
+                        <div class="title">
+                            <span class="category-name" th:text="${articleDetail.category.name}">java</span>
+                            <span class="blog-title" th:text="${articleDetail.title}">mybatis日常使用</span>
+                        </div>
+                        <div class="blog-content">
+                            <div  class="icon">
+                                <img th:src="@{${articleDetail.pic}}">
+                            </div>
+                            <div class="article-content">
+                                <div class="span-wrapper">
+                                    <span th:text="${articleDetail.content}">内容</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tail">
+                            <div class="date" >
+                                <img th:src="@{/front/img/time.png}" alt=""><span th:text="${articleDetail.createTime.toLocalDate()}">2021-12-21</span>
+                            </div>
+                            <div class="view">
+                                <img th:src="@{/front/img/view-1.png}" alt=""><span th:text="${articleDetail.views==null}?0:${articleDetail.views}">56浏览</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="front/pager::pager">
+            </div>
+        </div>
+
+        <!-- 右侧其它 -->
+        <div class="others right" th:fragment="right">
+            <div class="search">
+                <input type="text"  class="form-input" placeholder="请输入要搜索的文章">
+                <button>
+                    搜索
+                </button>
+            </div>
+
+            <!-- 标签展示 -->
+            <div class="blog-tags sort">
+                <div class="item-content">
+                    <p class="item-name">标签云</p>
+                    <div class="tag-wrapper">
+                        <a class="tag-item"href="javascript:void(0)" th:each="tag:${tags}" th:text="${tag.name}" th:tagId="${tag.id}">mybatis</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 最新发布 -->
+            <div class="blog-recent sort">
+                <div class="item-content">
+                    <p class="item-name">最新发布</p>
+                    <div class="recent-wrapper">
+                        <div class="recent-item" th:each="article:${articlesRecent}" th:articleId="${article.id}">
+                            <p th:text="${article.title}" >javascripg高级语法</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分类展示 -->
+            <div class="blog-category sort">
+                <div class="item-content">
+                    <p class="item-name">分类</p>
+                    <div class="category-wrapper">
+                        <a href="javascript:void(0)" class="category-item" th:each="category:${categories}" th:categoryId="${category.id}">
+                            <span th:text="${category.name}">生活笔记</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 页脚 -->
+<div th:replace="admin/footer::footer">
+    页脚内容
+</div>
+
+<script th:src="@{/plugins/jquery.min.js}"></script>
+<script th:src="@{/front/js/index.js}"></script>
+<script th:src="@{/front/js/pager.js}"></script>
+</body>
+
+</html>

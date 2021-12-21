@@ -1,0 +1,36 @@
+.category .card .card-body .mytable{
+    border-top: 3px solid #0d82ff;
+    height: 680px;
+    overflow: auto;
+}
+.category .card .card-body{
+    height: 825px;
+}
+.category .operation input {
+    transform: translateY(8%);
+    width: 100px;
+}
+.category .operation img {
+    width: 18px;
+    height: 18px;
+    vertical-align: sub;
+    transform: translateY(-7%);
+}
+.category .operation a {
+    margin-right: 5px;
+}
+
+#show>li {
+    float: left;
+    list-style: none;
+    border: 1px solid #3a3939;
+}
+#show>li>img{
+}
+.selected{
+    background-color: rgb(9, 146, 230) !important;
+}
+.category #updateCategory tr>td,
+.category tr>th{
+    vertical-align: middle;
+}

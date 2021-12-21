@@ -1,0 +1,42 @@
+.pager {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pager .pages {
+    display: inline-block;
+}
+
+.pager .pages .page-item button:hover,
+.pager .pages .meactive button {
+    background-color: #00a1d6;
+    color: #fff;
+    border: 1px solid #00a1d6;
+}
+
+.pager button {
+    padding: 0 13px;
+    min-width: 17px;
+    height: 40px;
+    color: #222;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.pager .pages li {
+    display: inline-block;
+    font-weight: 700;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.pager ul,
+.pager li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
