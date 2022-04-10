@@ -1,10 +1,13 @@
 package com.onestep.config;
 
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,8 +21,26 @@ public class ShiroConfig {
   }
 
   @Bean
-  public DefaultWebSecurityManager securityManager(MyRealm myRealm) {
-    DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager(myRealm);
+  public SimpleCookie simpleCookie() {
+    SimpleCookie rememberMe = new SimpleCookie("rememberMe");
+    rememberMe.setMaxAge(60 * 60 * 24 * 7);
+    return rememberMe;
+  }
+
+  @Bean
+  public CookieRememberMeManager cookieRememberMeManager(SimpleCookie simpleCookie) {
+    CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+    cookieRememberMeManager.setCookie(simpleCookie);
+    //CipherKey 需要长度是16的字节数组
+    cookieRememberMeManager.setCipherKey(Base64.getDecoder().decode("QnV5SXRZb3VyU2VsZk9rPw=="));
+    return cookieRememberMeManager;
+  }
+
+  @Bean
+  public DefaultWebSecurityManager securityManager(MyRealm myRealm, CookieRememberMeManager cookieRememberMeManager) {
+    DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+    securityManager.setRealm(myRealm);
+    securityManager.setRememberMeManager(cookieRememberMeManager);
     return securityManager;
   }
 
@@ -48,7 +69,7 @@ public class ShiroConfig {
 
     role:该资源必须得到角色权限才能访问
 */
- 
+
     // 登录 URL 放行
     filterChainMap.put("/user/login", "anon");
     filterChainMap.put("/**/*.js", "anon");
