@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: auto;
+}
+
+body {
+    background-color: #eee;
+}
+
+
+.header .wrapper {
+    text-align: left;
+    background-color: #542145;
+}
+
+.nav {
+    padding-left: 20px;
+    padding-top: 10px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav a {
+    margin-right: 40px;
+    height: 38px;
+    line-height: 38px;
+    color: rgb(207, 210, 212);
+    text-decoration: none;
+}
+
+.nav a:hover {
+    color: aliceblue;
+}

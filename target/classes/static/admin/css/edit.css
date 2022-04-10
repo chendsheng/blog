@@ -1,0 +1,10 @@
+.edit .card {
+    border-top: 3px solid rgba(13, 130, 255, 1);
+    height: 940px;
+}
+.modal-dialog{
+    margin-top: 15%;
+}
+.randomPic{
+    margin-right: 5px;
+}

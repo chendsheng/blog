@@ -15,23 +15,7 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-  //记住我
-  @Bean(name = "rememberMeManager")
-  public CookieRememberMeManager rememberMeManager(){
-    CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
-    cookieRememberMeManager.setCookie(rememberMeCookie());
-    //这个地方有点坑，不是所有的base64编码都可以用，长度过大过小都不行，没搞明白，官网给出的要么0x开头十六进制，要么base64
-    cookieRememberMeManager.setCipherKey(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
-    return cookieRememberMeManager;
-  }
-  //cookie管理
-  @Bean
-  public SimpleCookie rememberMeCookie() {
-    SimpleCookie cookie = new SimpleCookie("rememberMe");
-    cookie.setHttpOnly(true);
-    cookie.setMaxAge(1 * 60 * 60);
-    return cookie;
-  }
+
 
   @Bean
   public MyRealm myAuthRealm(){
@@ -41,7 +25,6 @@ public class ShiroConfig {
   @Bean
   public DefaultWebSecurityManager securityManager(MyRealm myRealm){
     DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager(myRealm);
-    securityManager.setRememberMeManager(rememberMeManager());
     return securityManager;
   }
 

@@ -1,0 +1,236 @@
+.toTop img {
+    width: 25px;
+    position: fixed;
+    bottom: 10%;
+    right: 10%;
+    display: none;
+    cursor: pointer;
+    opacity: .7;
+}
+
+.describe {
+    text-align: center;
+    border-top: 1px solid rgb(228, 218, 218);
+    padding: 10px 0;
+    border-bottom: 1px solid rgb(228, 218, 218);
+}
+
+#md{
+    margin-top: 15px;
+}
+
+.path {
+    display: flex;
+    padding: 10px 0;
+}
+
+.path>span {
+    margin-left: 3px;
+}
+
+#category{
+    color: #15bb0a;
+    cursor: pointer;
+}
+#category:hover{
+    color: #0f8906;
+}
+
+.describe .message span{
+    font-size: 5px;
+    color: rgb(134, 131, 131);
+}
+.describe .message .time{
+    margin-left: 15px;
+}
+.describe .message .view{
+    margin-left: 10px;
+}
+
+.describe .title {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.describe .message img {
+    width: 12px;
+    height: 12px;
+    margin-right: 3px;
+    vertical-align: -1px;
+}
+
+.describe .message .tag{
+    padding: 3px;
+    margin-right: 5px;
+    border-radius: 2px;
+    background-color: #00000014;
+    color: #000000ba;
+    cursor: pointer;
+}
+.describe .message .tag:hover{
+    background-color: #c2bfbf;
+}
+
+/*editormd默认有padding,会使宽度比默认的宽40px*/
+.editormd-html-preview{
+    padding: 0;
+}
+
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1600px;
+    margin: 30px auto;
+    min-height: 925px;
+    border-radius: 10px;
+}
+
+/*.right*/
+@media screen and (max-width:800px) {
+    .right {
+        display: none;
+    }
+}
+
+div.search {
+    display: inline-block;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 36px;
+    font-size: 0;
+    /*box-shadow: 0 0 5px rgb(43, 44, 46);*/
+    margin: 6px 0 20px 6px;
+}
+
+.search input {
+    outline: none;
+    display: inline-block;
+    height: 36px;
+    border: 0;
+    padding-left: 10px;
+}
+
+.search button {
+    background-color: rgb(197, 195, 192);
+    height: 36px;
+    width: 36px;
+    border: 0;
+    cursor: pointer;
+}
+
+.search img {
+    width: 100%;
+}
+
+/*备用search*/
+.search-bak{
+    display: none;
+    position: relative;
+    height: 40px;
+    margin:10px 0;
+}
+#bak{
+    position: absolute;
+    right: 5px;
+    margin: 0;
+}
+@media screen and (max-width:800px) {
+    .search-bak{
+        display: block;
+    }
+    .container{
+        margin-top: 0;
+    }
+}
+
+.left {
+    flex: 1;
+    padding-top: 10px;
+    overflow: hidden;
+    margin-right: 10px;
+    padding-left: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.right {
+    width: 330px;
+    padding: 10px;
+}
+
+.right .sort {
+    padding: 20px 5px;
+    min-height: 200px;
+    position: relative;
+    border-radius: 10px;
+    /*box-shadow: 0 0 10px 1px rgb(61, 70, 69);*/
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.right .item-content {
+    margin: 5px 10px;
+}
+
+.right .tag-item {
+    color: white;
+    margin: 8px 6px 0 0;
+    padding: 3px;
+    font-size: small;
+    cursor: pointer;
+    display: inline-block;
+    box-shadow: 0 0 3px rgb(32, 32, 34);
+    text-decoration: none;
+}
+
+.right .tag-item:hover {
+    transform: scale(1.05);
+}
+
+.right .item-name {
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(51, 131, 44);
+    margin-bottom: 10px;
+    color: rgb(98, 100, 97);
+}
+
+.right .recent-item {
+    color: rgb(230, 235, 233);
+    margin-top: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: rgb(3, 146, 146);
+    opacity: .8;
+    padding: 5px 5px;
+    box-shadow: 0 0 3px gray;
+    text-align: center;
+}
+
+.right .recent-item:hover {
+    opacity: 1;
+}
+
+.right .category-wrapper {
+    text-align: left;
+}
+
+.right .category-wrapper a {
+    margin-top: 5px;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 5px 0;
+    width: 145px;
+    display: inline-block;
+    color: aliceblue;
+    background-color: rgb(7, 139, 95);
+    opacity: .7;
+    box-shadow: 0 0 3px rgb(32, 32, 34);
+    margin-right: 5px;
+    text-align: center;
+}
+
+.right .category-wrapper a:hover {
+    opacity: 1;
+}

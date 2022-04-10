@@ -1,7 +1,7 @@
 package com.onestep.config;
 
-import com.onestep.entity.Admin;
-import com.onestep.service.AdminService;
+import com.onestep.entity.User;
+import com.onestep.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -17,16 +17,16 @@ import javax.annotation.Resource;
 
 public class MyRealm extends AuthorizingRealm {
   @Resource
-  AdminService adminService;
+  UserService adminService;
 
   @Override
   //授权
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
     //获取用户名
-    String username = (String)principals.getPrimaryPrincipal();
+    User username = (User)principals.getPrimaryPrincipal();
     SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
     //设置用户角色
-    info.addRole(adminService.selectRole(username));
+    info.addRole(username.getRole());
     //设置用户权限
     //info.setStringPermissions();
     return info;
@@ -38,14 +38,14 @@ public class MyRealm extends AuthorizingRealm {
     // 根据 Token 获取用户名，如果您不知道该 Token 怎么来的，先可以不管，下文会解释
     String name = (String) token.getPrincipal();
     // 根据用户名从数据库中查询该用户
-    Admin admin = adminService.selectAdmin(name);
+    User admin = adminService.selectUser(name);
     if(admin != null){
       // 把当前用户存到 Session 中
       Session session = SecurityUtils.getSubject().getSession();
       session.setAttribute("admin", admin);
 
       // 传入用户名和密码进行身份认证，并返回认证信息
-      AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(admin.getName(), admin.getPassword(), "myRealm");
+      AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(admin, admin.getPassword(), "myRealm");
       return authcInfo;
     } else {
       return null;

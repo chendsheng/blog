@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/admin::head('后台管理_文章')">
+</head>
+<link rel="stylesheet" th:href="@{/admin/css/common.css}">
+<link rel="stylesheet" th:href="@{/admin/css/article.css}">
+
+<body>
+<div class="h-100 d-flex">
+    <div th:replace="admin/sider::sider('article',${admin})"></div>
+
+    <div class="main flex-grow-1">
+        <div class="d-flex flex-column warper">
+            <div th:replace="admin/header::header(${admin})"></div>
+
+            <!--显示内容-->
+            <div class="flex-grow-1 p-2">
+                <div class="article">
+                    <div class="container-fluide  pl-3 pr-3 pt-2 pb-2">
+                        <div class="card shadow flex-grow-1">
+                            <div class="card-header">
+                                <h5>文章管理</h5>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="operation">
+                                    <a class="btn btn-success" th:href="@{/admin/edit}">
+                                        <img src="../icon/insert.png" th:src="@{/icon/insert.png}" alt="">
+                                        <span>新增</span>
+                                    </a>
+                                    <a class="btn btn-info" href="javascript:void(0)" id="update">
+                                        <img src="../icon/update.png" th:src="@{/icon/update.png}" alt="">
+                                        <span>修改</span>
+                                    </a>
+                                    <a class="btn btn-danger" href="javascript:void(0)" id="delete">
+                                        <img src="../icon/delete.png" th:src="@{/icon/delete.png}" alt="">
+                                        <span>删除</span>
+                                    </a>
+
+                                    <input class="form-control w-auto d-inline" type="text" name="search" id="search" placeholder="请输入要搜索的文章" th:value="${search!=null}?${search}">
+                                    <button type="submit" class="btn btn-primary ml-1" id="submit">
+                                        <img src="../icon/search.png" th:src="@{/icon/search.png}" alt="">
+                                        <span>搜索</span>
+                                    </button>
+                                </div>
+                                <div id="updateArticle">
+                                    <div th:fragment="updateArticle">
+                                        <div class="mytable mt-2">
+                                            <table class="table table-hover table-bordered text-center">
+                                                <thead>
+                                                <tr class="t-header">
+                                                    <th>
+                                                        <input type="checkbox" id="all" >
+                                                    </th>
+                                                    <th>
+                                                        <span>标题</span>
+                                                    </th>
+                                                    <th>
+                                                        <span>分类</span>
+                                                    </th>
+                                                    <th>
+                                                        <span>图标</span>
+                                                    </th>
+                                                    <th>
+                                                        <span>标签</span>
+                                                    </th>
+                                                    <th>
+                                                        <span>浏览量</span>
+                                                    </th>
+                                                    <th>
+                                                        <span>发布时间</span>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="articleDetail:${articleDetails}">
+                                                    <td>
+                                                        <input type="checkbox" name="checkbox" th:id="${articleDetail.id}" >
+                                                    </td>
+                                                    <td>
+                                                        <span th:text="${articleDetail.title}" class="d-inline-block"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span th:text="${articleDetail.category.name}" class="d-inline-block"></span>
+                                                    </td>
+                                                    <td>
+                                                        <img th:src="@{${articleDetail.category.icon}}">
+                                                    </td>
+                                                    <td>
+                                                        <span th:text="${articleDetail.getTagNames()}" class="d-inline-block"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span th:text="${articleDetail.views==null}?0:${articleDetail.views}" class="d-inline-block"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span th:text="${articleDetail.createTime.toLocalDate()}+' '+${articleDetail.createTime.toLocalTime()}" class="d-inline-block"></span>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div th:replace="admin/page::page('article')">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="admin/footer::footer"></div>
+    </div>
+</div>
+<script th:src="@{/admin/js/alert.js}"></script>
+<script th:src="@{/admin/js/sider.js}"></script>
+<script th:src="@{/admin/js/article.js}"></script>
+</body>
+</html>

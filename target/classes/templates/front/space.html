@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的空间</title>
+    <link rel="shortcut icon" th:href="@{/favicon/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/front/css/header.css}"/>
+    <link rel="stylesheet" th:href="@{/front/css/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/front/css/space.css}"/>
+    <script th:src="@{/plugins/jquery.min.js}"></script>
+</head>
+<body>
+<!-- 导航栏 -->
+<div th:replace="front/index::header"></div>
+
+<div class="my-space">
+    <div class="content">
+        <div class="info">
+            <div class="email">
+                <img th:src="@{/front/img/email.png}" alt="">
+                <sapn>farccaway@163.com</sapn>
+            </div>
+            <div class="github">
+                <img th:src="@{/front/img/github.png}" alt="">
+                <a href="https://github.com/chendsheng">https://github.com/chendsheng</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="admin/footer::footer">
+    页脚内容
+</div>
+</body>
+</html>
