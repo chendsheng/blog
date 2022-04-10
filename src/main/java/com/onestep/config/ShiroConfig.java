@@ -1,11 +1,7 @@
 package com.onestep.config;
 
-import org.apache.shiro.codec.Base64;
-import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,20 +12,19 @@ import java.util.Map;
 public class ShiroConfig {
 
 
-
   @Bean
-  public MyRealm myAuthRealm(){
+  public MyRealm myAuthRealm() {
     return new MyRealm();
   }
 
   @Bean
-  public DefaultWebSecurityManager securityManager(MyRealm myRealm){
+  public DefaultWebSecurityManager securityManager(MyRealm myRealm) {
     DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager(myRealm);
     return securityManager;
   }
 
   @Bean
-  public ShiroFilterFactoryBean factoryBean(DefaultWebSecurityManager securityManager){
+  public ShiroFilterFactoryBean factoryBean(DefaultWebSecurityManager securityManager) {
     ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
     bean.setSecurityManager(securityManager);
 
@@ -37,8 +32,6 @@ public class ShiroConfig {
     bean.setLoginUrl("/admin/login");
     //设置无权限时，跳转页面
     bean.setUnauthorizedUrl("/error/unAuthorized");
-    // 设置成功之后要跳转的链接
-    bean.setSuccessUrl("/admin/index");
 
     // LinkedHashMap 是有序的，进行顺序拦截器配置
     Map<String, String> filterChainMap = new LinkedHashMap<>();
@@ -55,20 +48,20 @@ public class ShiroConfig {
 
     role:该资源必须得到角色权限才能访问
 */
-
+ 
     // 登录 URL 放行
-    filterChainMap.put("/admin/login", "anon");
-    filterChainMap.put("/**/*.js","anon");
-    filterChainMap.put("/**/*.css","anon");
-    filterChainMap.put("/**/*.jpeg","anon");
-    filterChainMap.put("/**/*.png","anon");
-    filterChainMap.put("/**/*.ico","anon");
-    filterChainMap.put("/**/*.jpg","anon");
-    filterChainMap.put("/*.ico","anon");
-    // 以"/admin/" 开头的用户需要身份认证，authc 表示要进行身份认证
+    filterChainMap.put("/user/login", "anon");
+    filterChainMap.put("/**/*.js", "anon");
+    filterChainMap.put("/**/*.css", "anon");
+    filterChainMap.put("/**/*.jpeg", "anon");
+    filterChainMap.put("/**/*.png", "anon");
+    filterChainMap.put("/**/*.ico", "anon");
+    filterChainMap.put("/**/*.jpg", "anon");
+    filterChainMap.put("/*.ico", "anon");
+    // 以"/user/" 开头的用户需要身份认证，authc 表示要进行身份认证
     // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最下边，不然"/**"后面的过滤会不管用-->:
-    filterChainMap.put("/admin/system","roles[admin]");
-    filterChainMap.put("/admin/**","user");
+    filterChainMap.put("/admin/system", "roles[admin]");
+    filterChainMap.put("/admin/**", "user");
 
     bean.setFilterChainDefinitionMap(filterChainMap);
     return bean;

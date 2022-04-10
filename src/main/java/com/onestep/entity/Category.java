@@ -5,12 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.tomcat.jni.Local;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Category {
+public class Category implements Serializable {
   private Integer id;
   private String name;
   private String icon;

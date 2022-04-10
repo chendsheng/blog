@@ -1,5 +1,6 @@
 package com.onestep.interceptor;
 
+import com.onestep.entity.User;
 import com.onestep.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -17,7 +18,7 @@ public class UserInfoInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     Subject subject = SecurityUtils.getSubject();
     if (subject.isRemembered() && !subject.isAuthenticated())
-      subject.getSession().setAttribute("user",userService.selectUser(subject.getPrincipal().toString()));
+      request.getSession().setAttribute("user",subject.getPrincipal());
     return true;
   }
 }

@@ -1,8 +1,8 @@
 $(function () {
-    let curWwwPath=window.document.location.href;
-    let pathName=window.document.location.pathname;
-    let pos=curWwwPath.indexOf(pathName);
-    let localhostPath=curWwwPath.substring(0,pos);
+    let curWwwPath = window.document.location.href;
+    let pathName = window.document.location.pathname;
+    let pos = curWwwPath.indexOf(pathName);
+    let localhostPath = curWwwPath.substring(0, pos);
     let realPath = localhostPath + $('#realPath').attr('href')
 
     let show = function (count, currentIndex) {
@@ -16,7 +16,7 @@ $(function () {
                 $('.num>button').eq(i).text(i + 1)
             }
             $('.num>button').each(function (index) {
-                if (index>=count) {
+                if (index >= count) {
                     $(this).parent().hide()
                 }
             })
@@ -74,20 +74,22 @@ $(function () {
         }
     }
     let currentIndex = 1
-    let search = $('#title_search')
+    let search = $('#search')
+
     //搜素
-    function go(){
-        if (search.val().trim().length>0){
+    function go() {
+        if (search.val().trim().length > 0) {
             currentIndex = 1
-            $('#blogsList').load(realPath+'/list?title='+search.val().trim(),
+            $('#blogsList').load(realPath + '/list?title=' + search.val().trim(),
                 function () {
                     show($('.blog-wrapper').attr("count"), 1)
                 })
         }
     }
-    $('.search>button').click(go)
+
+    $('#search>button').click(go())
     $('.search>input').focus().keydown(function (e) {
-        if (e.keyCode==13){
+        if (e.keyCode == 13) {
             go()
         }
     })
@@ -96,10 +98,10 @@ $(function () {
 
     //直接跳转页面
     $('.num>button').click(function () {
-        if ($(this).text().trim()!=""){
-            currentIndex =  parseInt($(this).text().trim())
-            show($('.blog-wrapper').attr("count"),currentIndex)
-            $('#blogsList').load(realPath+'/list?pageNum='+$(this).text().trim()+'&'+$('.blog-wrapper').attr("selectType")+'='+$('.blog-wrapper').attr("selectValue"))
+        if ($(this).text().trim() != "") {
+            currentIndex = parseInt($(this).text().trim())
+            show($('.blog-wrapper').attr("count"), currentIndex)
+            $('#blogsList').load(realPath + '/list?pageNum=' + $(this).text().trim() + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"))
         }
     })
 
@@ -107,20 +109,24 @@ $(function () {
     $('#previous').click(function () {
         currentIndex -= 1
         show($('.blog-wrapper').attr("count"), currentIndex)
-        $('#blogsList').load(realPath+'/list?pageNum='+currentIndex+'&'+$('.blog-wrapper').attr("selectType")+'='+$('.blog-wrapper').attr("selectValue"))
+        $('#blogsList').load(realPath + '/list?pageNum=' + currentIndex + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"))
     })
 
     //下一页
     $('#next').click(function () {
         currentIndex += 1
         show($('.blog-wrapper').attr("count"), currentIndex)
-        $('#blogsList').load(realPath+'/list?pageNum='+currentIndex+'&'+$('.blog-wrapper').attr("selectType")+'='+$('.blog-wrapper').attr("selectValue"))
+        $('#blogsList').load(realPath + '/list?pageNum=' + currentIndex + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"),
+            () => {
+                document.scrollingElement.scrollTop = 0
+                document.body.scrollTop = 0
+            })
     })
 
     //按分类搜索
     $('.category-wrapper>a').click(function () {
         currentIndex = 1
-        $('#blogsList').load(realPath+'/list?categoryId='+ $(this).attr('categoryId'),
+        $('#blogsList').load(realPath + '/list?categoryId=' + $(this).attr('categoryId'),
             function () {
                 show($('.blog-wrapper').attr("count"), currentIndex)
             })
@@ -129,7 +135,7 @@ $(function () {
     //按标签搜索
     $('.tag-wrapper>a').click(function () {
         currentIndex = 1
-        $('#blogsList').load(realPath+'/list?tagId='+ $(this).attr('tagId'),
+        $('#blogsList').load(realPath + '/list?tagId=' + $(this).attr('tagId'),
             function () {
                 show($('.blog-wrapper').attr("count"), currentIndex)
             })
@@ -137,11 +143,11 @@ $(function () {
 
     //最新文章搜索
     $('.recent-wrapper>.recent-item').click(function () {
-        window.open(realPath+'/detail/'+$(this).attr('articleId'))
+        window.open(realPath + '/detail/' + $(this).attr('articleId'))
     })
 
     //文章详情
-    $('#blogsList').on('click',".blog-item",function () {
-        window.open(realPath+'/detail/'+$(this).attr('blogId'))
+    $('#blogsList').on('click', ".blog-item", function () {
+        window.open(realPath + '/detail/' + $(this).attr('blogId'))
     })
 })

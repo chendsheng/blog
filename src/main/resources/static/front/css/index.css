@@ -24,6 +24,7 @@ body {
 
 .nav {
     padding-left: 20px;
+    padding-right: 20px;
     padding-top: 10px;
     height: 50px;
     display: flex;
@@ -31,7 +32,7 @@ body {
 }
 
 .nav a {
-    margin-right: 40px;
+    margin-left: 40px;
     height: 38px;
     line-height: 38px;
     color: rgb(207, 210, 212);
@@ -41,52 +42,42 @@ body {
 .nav a:hover {
     color: aliceblue;
 }
+
+.rnv {
+    display: flex;
+    justify-content: space-between;
+}
+
 div.search {
     display: inline-block;
+    margin-top: 6px;
     border-radius: 4px;
     overflow: hidden;
-    height: 36px;
+    height: 30px;
     font-size: 0;
     /*box-shadow: 0 0 5px rgb(43, 44, 46);*/
-    margin: 6px 0 20px 6px;
 }
 
 .search input {
     outline: none;
+    vertical-align: bottom;
     display: inline-block;
-    height: 36px;
+    height: 30px;
     border: 0;
     padding-left: 10px;
 }
 
 .search button {
     background-color: rgb(197, 195, 192);
-    height: 36px;
+    height: 30px;
     width: 36px;
     border: 0;
     cursor: pointer;
 }
 
-.search img {
-    width: 100%;
+@media screen and (max-width: 800px) {
 }
 
-.search-bak{
-    display: none;
-    position: relative;
-    height: 40px;
-    margin-top: 10px;
-}
-#bak{
-    position: absolute;
-    right: 5px;
-    margin: 0;
-}
-@media screen and (max-width:800px) {
-    .search-bak{
-        display: block;
-    }
-}
 .loop img {
     width: 100%;
     height: 300px;
@@ -103,7 +94,7 @@ div.search {
     overflow: hidden;
 }
 
-#blogsList{
+#blogsList {
     min-height: 980px;
 }
 
@@ -186,31 +177,36 @@ div.search {
 .right .category-wrapper a:hover {
     opacity: 1;
 }
-.left .blog-content{
+
+.left .blog-content {
     display: flex;
     margin-top: 15px;
 }
-.left .icon{
+
+.left .icon {
     width: 210px;
     height: 125px;
     overflow: hidden;
 }
-.left .icon>img{
+
+.left .icon > img {
     transition: .5s;
     width: 100%;
 }
 
 
-.left .blog-item:hover .icon>img{
+.left .blog-item:hover .icon > img {
     transform: scale(1.1);
 }
-.left .blog-content>.article-content{
+
+.left .blog-content > .article-content {
     flex: 1;
     margin-left: 15px;
-    margin-top:15px;
+    margin-top: 15px;
     overflow: hidden;
 }
-.left .blog-content>.article-content span{
+
+.left .blog-content > .article-content span {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -221,16 +217,43 @@ div.search {
     color: rgb(109, 102, 102);
     line-height: 20px;
 }
-@media screen and (max-width:800px) {
-    .left .icon{
+
+@media screen and (max-width: 800px) {
+    .left .icon {
         width: 110px;
         height: 62px;
     }
-    .left .blog-content>.article-content{
+
+    .left .blog-content > .article-content {
         margin-top: 0;
     }
-    .left .blog-content>.article-content span{
+
+    .left .blog-content > .article-content span {
         -webkit-line-clamp: 3;
+    }
+
+    .nav {
+        padding-right: 10px;
+        padding-left: 5px;
+        font-size: 10px;
+    }
+
+    .nav a {
+        margin-left: 10px;
+    }
+
+    .rnv .search {
+        margin-top: 7px;
+        height: 25px;
+    }
+
+    .search input {
+        height: 25px;
+        width: 150px;
+    }
+
+    .search button {
+        height: 25px;
     }
 }
 
@@ -251,17 +274,19 @@ div.search {
     text-align: right;
     margin-right: 10px;
 }
-.left .tail>div{
+
+.left .tail > div {
     margin-right: 15px;
 }
-.left .tail img{
+
+.left .tail img {
     width: 12px;
     height: 12px;
-    vertical-align:-1.9px;
+    vertical-align: -1.9px;
     margin-right: 3px;
 }
 
-.left .tail>div {
+.left .tail > div {
     display: inline-block;
     font-size: 5px;
 }
@@ -310,8 +335,8 @@ div.search {
     cursor: pointer;
 }
 
-@media screen and (max-width:800px) {
-    .down{
+@media screen and (max-width: 800px) {
+    .down {
         display: none;
     }
 }
@@ -330,7 +355,7 @@ div.search {
     }
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width: 800px) {
     .right {
         display: none;
     }

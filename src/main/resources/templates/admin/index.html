@@ -8,11 +8,11 @@
 
 <body>
 <div class="h-100 d-flex">
-    <div th:replace="admin/sider::sider('index',${admin})"></div>
+    <div th:replace="admin/sider::sider('index',${session.user})"></div>
 
     <div class="main flex-grow-1 d-flex flex-column">
         <div class="d-flex flex-column warper">
-            <div th:replace="admin/header::header(${admin})"></div>
+            <div th:replace="admin/header::header(${session.user})"></div>
 
             <div class="flex-grow-1 p-2">
                 <div class="index">
@@ -33,7 +33,8 @@
                                                 <p>随笔记录</p>
                                             </div>
                                             <div class="icon">
-                                                <img src="../icon-black/edit.png" th:src="@{/icon-black/edit.png}" alt="">
+                                                <img src="../icon-black/edit.png" th:src="@{/icon-black/edit.png}"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <a th:href="@{/admin/edit}" class="text-center p-2">
@@ -52,7 +53,8 @@
                                                 <p>文章数量</p>
                                             </div>
                                             <div class="icon">
-                                                <img src="../icon-black/blog.png" th:src="@{/icon-black/blog.png}" alt="">
+                                                <img src="../icon-black/blog.png" th:src="@{/icon-black/blog.png}"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <a href="#" class="text-center p-2">
@@ -62,24 +64,24 @@
                                     </div>
                                 </div>
 
-      <!--                          &lt;!&ndash;评论&ndash;&gt;
-                                <div class="col-lg-4 col-6 p-1">
-                                    <div class="bg-primary rounded position-relative">
-                                        <div class="d-flex justify-content-between p-2">
-                                            <div class="inner pb-5">
-                                                <h2 th:text="0">98</h2>
-                                                <p>评论数量</p>
-                                            </div>
-                                            <div class="icon">
-                                                <img src="../icon-black/blog.png" th:src="@{/icon-black/comment.png}" alt="">
-                                            </div>
-                                        </div>
-                                        <a th:href="@{/admin/comment}" class="text-center p-2">
-                                            <span class="text-white">More info</span>
-                                            <img src="../icon/right.png" th:src="@{/icon/right.png}" alt="">
-                                        </a>
-                                    </div>
-                                </div>-->
+                                <!--                          &lt;!&ndash;评论&ndash;&gt;
+                                                          <div class="col-lg-4 col-6 p-1">
+                                                              <div class="bg-primary rounded position-relative">
+                                                                  <div class="d-flex justify-content-between p-2">
+                                                                      <div class="inner pb-5">
+                                                                          <h2 th:text="0">98</h2>
+                                                                          <p>评论数量</p>
+                                                                      </div>
+                                                                      <div class="icon">
+                                                                          <img src="../icon-black/blog.png" th:src="@{/icon-black/comment.png}" alt="">
+                                                                      </div>
+                                                                  </div>
+                                                                  <a th:href="@{/admin/comment}" class="text-center p-2">
+                                                                      <span class="text-white">More info</span>
+                                                                      <img src="../icon/right.png" th:src="@{/icon/right.png}" alt="">
+                                                                  </a>
+                                                              </div>
+                                                          </div>-->
 
                                 <!-- 分类 -->
                                 <div class="col-lg-4 col-6 p-1">
@@ -90,7 +92,8 @@
                                                 <p>分类数量</p>
                                             </div>
                                             <div class="icon">
-                                                <img src="../icon-black/blog.png" th:src="@{/icon-black/category.png}" alt="">
+                                                <img src="../icon-black/blog.png" th:src="@{/icon-black/category.png}"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <a href="@{/admin/category}" class="text-center p-2">
@@ -109,7 +112,8 @@
                                                 <p>标签数量</p>
                                             </div>
                                             <div class="icon">
-                                                <img src="../icon-black/blog.png" th:src="@{/icon-black/tag.png}" alt="">
+                                                <img src="../icon-black/blog.png" th:src="@{/icon-black/tag.png}"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <a href="@{/admin/tag}" class="text-center p-2">
@@ -136,10 +140,10 @@
 <script>
     $(function () {
         $(".index .row>div>div").mouseenter(function () {
-            $(this).find(".icon img").stop().animate({ width: '100px', height: '100px' }, '2s')
+            $(this).find(".icon img").stop().animate({width: '100px', height: '100px'}, '2s')
         })
         $(".index .row>div>div").mouseleave(function () {
-            $(this).find(".icon img").stop().animate({ width: '90px', height: '90px' }, '2s')
+            $(this).find(".icon img").stop().animate({width: '90px', height: '90px'}, '2s')
         })
     })
 </script>

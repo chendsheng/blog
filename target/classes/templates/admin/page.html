@@ -7,56 +7,73 @@
 <link rel="stylesheet" th:href="@{/admin/css/index.css}">
 
 <body>
-    <div th:fragment="page(name)" class="page text-center mt-4">
+<div th:fragment="page(name)" class="page text-center mt-4">
 
-        <a th:if="${search!=null}" th:href="${pageInfo.isFirstPage}?'javascript:void(0)':@{'/admin/'+${name}+'/list?pageNum=1&search='+${search}+'&pageSize='+${pageInfo.pageSize}}" class="btn bg-light">
-            <img src="../icon-black/first.png" th:src="@{/icon-black/first.png}" alt="" title="第一页">
-        </a>
-        <a th:if="${search!=null}" th:href="${pageInfo.hasPreviousPage}?@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.prePage}+'&search='+${search}+'&pageSize='+${pageInfo.pageSize}}:'javascript:void(0)'" class="btn bg-light">
-            <img src="../icon-black/forward.png" th:src="@{/icon-black/forward.png}" alt="" title="上一页">
-        </a>
+    <a th:if="${search!=null}"
+       th:href="${pageInfo.isFirstPage}?'javascript:void(0)':@{'/admin/'+${name}+'/list?pageNum=1&search='+${search}+'&pageSize='+${pageInfo.pageSize}}"
+       class="btn bg-light">
+        <img src="../icon-black/first.png" th:src="@{/icon-black/first.png}" alt="" title="第一页">
+    </a>
+    <a th:if="${search!=null}"
+       th:href="${pageInfo.hasPreviousPage}?@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.prePage}+'&search='+${search}+'&pageSize='+${pageInfo.pageSize}}:'javascript:void(0)'"
+       class="btn bg-light">
+        <img src="../icon-black/forward.png" th:src="@{/icon-black/forward.png}" alt="" title="上一页">
+    </a>
 
-        <a th:unless="${search!=null}" th:href="${pageInfo.isFirstPage}?'javascript:void(0)':@{'/admin/'+${name}+'/list?pageNum=1'+'&pageSize='+${pageInfo.pageSize}}" class="btn bg-light">
-            <img src="../icon-black/first.png" th:src="@{/icon-black/first.png}" alt="" title="第一页">
-        </a>
-        <a th:unless="${search!=null}" th:href="${pageInfo.hasPreviousPage}?@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.prePage}+'&pageSize='+${pageInfo.pageSize}}:'javascript:void(0)'" class="btn bg-light">
-            <img src="../icon-black/forward.png" th:src="@{/icon-black/forward.png}" alt="" title="上一页">
-        </a>
-        <img class="separation" src="../icon-black/separation.png" th:src="@{/icon-black/separation.png}" alt="">
+    <a th:unless="${search!=null}"
+       th:href="${pageInfo.isFirstPage}?'javascript:void(0)':@{'/admin/'+${name}+'/list?pageNum=1'+'&pageSize='+${pageInfo.pageSize}}"
+       class="btn bg-light">
+        <img src="../icon-black/first.png" th:src="@{/icon-black/first.png}" alt="" title="第一页">
+    </a>
+    <a th:unless="${search!=null}"
+       th:href="${pageInfo.hasPreviousPage}?@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.prePage}+'&pageSize='+${pageInfo.pageSize}}:'javascript:void(0)'"
+       class="btn bg-light">
+        <img src="../icon-black/forward.png" th:src="@{/icon-black/forward.png}" alt="" title="上一页">
+    </a>
+    <img class="separation" src="../icon-black/separation.png" th:src="@{/icon-black/separation.png}" alt="">
 
-        <div class="d-inline">
-            <span>第</span>
-            <input class="form-control d-inline text-center" type="text" name="num" id="pageNum" th:value="${pageInfo.pageNum}">
-            <span>页</span>
+    <div class="d-inline">
+        <span>第</span>
+        <input class="form-control d-inline text-center" type="text" name="num" id="pageNum"
+               th:value="${pageInfo.pageNum}">
+        <span>页</span>
 
-            <span class="ml-3">共</span>
-            <span th:text="${pageInfo.pages}" id="pages">10</span>
-            <span>页</span>
-        </div>
-
-        <img class="separation" src="../icon-black/separation.png" th:src="@{/icon-black/separation.png}" alt="">
-
-
-        <a th:if="${search!=null}"  th:href="${pageInfo.hasNextPage}?@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.nextPage}+'&search='+${search}+'&pageSize='+${pageInfo.pageSize}}:'javascript:void(0)'" class="btn bg-light">
-            <img src="../icon-black/next.png" th:src="@{/icon-black/next.png}" alt="" title="下一页">
-        </a>
-        <a th:if="${search!=null}" th:href="${pageInfo.isLastPage}?'javascript:void(0)':@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.pages}+'&search='+${search}+'&pageSize='+${pageInfo.pageSize}}" class="btn bg-light">
-            <img src="../icon-black/last.png" th:src="@{/icon-black/last.png}" alt="" title="最后一页">
-        </a>
-
-        <a th:unless="${search!=null}" th:href="${pageInfo.hasNextPage}?@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.nextPage}+'&pageSize='+${pageInfo.pageSize}}:'javascript:void(0)'" class="btn bg-light">
-            <img src="../icon-black/next.png" th:src="@{/icon-black/next.png}" alt="" title="下一页">
-        </a>
-        <a th:unless="${search!=null}" th:href="${pageInfo.isLastPage}?'javascript:void(0)':@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.pages}+'&pageSize='+${pageInfo.pageSize}}" class="btn bg-light">
-            <img src="../icon-black/last.png" th:src="@{/icon-black/last.png}" alt="" title="最后一页">
-        </a>
-        <select name="pageSize" id="pageSize">
-            <option value="5" th:selected="${pageInfo.pageSize}==5">5</option>
-            <option value="10" th:selected="${pageInfo.pageSize}==10">10</option>
-            <option value="15" th:selected="${pageInfo.pageSize}==15">15</option>
-            <option value="20" th:selected="${pageInfo.pageSize}==20">20</option>
-        </select>
+        <span class="ml-3">共</span>
+        <span th:text="${pageInfo.pages}" id="pages">10</span>
+        <span>页</span>
     </div>
+
+    <img class="separation" src="../icon-black/separation.png" th:src="@{/icon-black/separation.png}" alt="">
+
+
+    <a th:if="${search!=null}"
+       th:href="${pageInfo.hasNextPage}?@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.nextPage}+'&search='+${search}+'&pageSize='+${pageInfo.pageSize}}:'javascript:void(0)'"
+       class="btn bg-light">
+        <img src="../icon-black/next.png" th:src="@{/icon-black/next.png}" alt="" title="下一页">
+    </a>
+    <a th:if="${search!=null}"
+       th:href="${pageInfo.isLastPage}?'javascript:void(0)':@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.pages}+'&search='+${search}+'&pageSize='+${pageInfo.pageSize}}"
+       class="btn bg-light">
+        <img src="../icon-black/last.png" th:src="@{/icon-black/last.png}" alt="" title="最后一页">
+    </a>
+
+    <a th:unless="${search!=null}"
+       th:href="${pageInfo.hasNextPage}?@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.nextPage}+'&pageSize='+${pageInfo.pageSize}}:'javascript:void(0)'"
+       class="btn bg-light">
+        <img src="../icon-black/next.png" th:src="@{/icon-black/next.png}" alt="" title="下一页">
+    </a>
+    <a th:unless="${search!=null}"
+       th:href="${pageInfo.isLastPage}?'javascript:void(0)':@{'/admin/'+${name}+'/list?pageNum='+${pageInfo.pages}+'&pageSize='+${pageInfo.pageSize}}"
+       class="btn bg-light">
+        <img src="../icon-black/last.png" th:src="@{/icon-black/last.png}" alt="" title="最后一页">
+    </a>
+    <select name="pageSize" id="pageSize">
+        <option value="5" th:selected="${pageInfo.pageSize}==5">5</option>
+        <option value="10" th:selected="${pageInfo.pageSize}==10">10</option>
+        <option value="15" th:selected="${pageInfo.pageSize}==15">15</option>
+        <option value="20" th:selected="${pageInfo.pageSize}==20">20</option>
+    </select>
+</div>
 </body>
 <script th:src="@{/admin/js/sider.js}"></script>
 <script>

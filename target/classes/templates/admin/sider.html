@@ -13,7 +13,8 @@
 
         <div class="t1">
             <div class="profile">
-                <img th:src="${admin==null or admin.photo==null}?@{/admin/img/user/favicon.ico}:@{${admin.photo}}" alt="">
+                <img th:src="${admin==null or admin.photo==null}?@{/admin/img/user/favicon.ico}:@{${admin.photo}}"
+                     alt="">
                 <span th:text="${admin.name}">杉桐</span>
             </div>
         </div>
@@ -31,7 +32,7 @@
             </a>
 
             <span class="mt-5 module">管理模块</span>
-            <a th:href="@{/admin/article}" class="btn" th:classappend="${path=='blog'}?active">
+            <a th:href="@{/admin/article}" class="btn" th:classappend="${path=='article'}?active">
                 <img src="../icon/blog.png" th:src="@{/icon/blog.png}" class="icon" alt="">
                 <span>博客管理</span>
             </a>

@@ -1,4 +1,4 @@
-$(function (){
+$(function () {
 
     //图片懒加载
     /*let pic = document.querySelector('.pic>img')
@@ -35,7 +35,6 @@ $(function (){
     $('.toTop').click(function () {
         $(window).scrollTop(0)
     })
-
 
 
 })

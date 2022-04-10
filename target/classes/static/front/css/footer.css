@@ -6,12 +6,12 @@
     height: 100px;
 }
 
-.footer>a {
+.footer > a {
     text-decoration: none;
     color: #768b9c;
     font-size: 12px;
 }
 
-.footer>a:hover {
+.footer > a:hover {
     color: #eb6b4b;
 }

@@ -1,25 +1,29 @@
-.my-space{
+.my-space {
     margin: 20px auto;
     min-height: 940px;
     max-width: 1200px;
     border-radius: 10px;
     background-color: white;
 }
-.info{
+
+.info {
     margin: 0 auto;
     padding-top: 10%;
     width: 300px;
 }
-.info>div {
+
+.info > div {
     margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-a{
+
+a {
     text-decoration: none;
     color: black;
 }
+
 .info img {
     width: 40px;
     margin-right: 10px;
