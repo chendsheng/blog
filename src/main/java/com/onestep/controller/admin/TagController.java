@@ -5,6 +5,7 @@ import com.onestep.entity.Tag;
 import com.onestep.service.TagService;
 import com.onestep.util.Result;
 import com.onestep.util.ResultGenerator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,14 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class TagController {
   @Resource
   private TagService tagService;
 
   @GetMapping("tag")
   public String select(Model model) {
+    log.debug("Get->/amdin/tag");
     Map<String, Object> map = new HashMap<>();
     map.put("pageSize", 10);
     map.put("pageNum", 1);
@@ -36,6 +39,7 @@ public class TagController {
   @GetMapping("tag/list")
   public String select(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize,
                        @RequestParam(value = "search", required = false) String search) {
+    log.debug("Get->/amdin/tag/list");
     Map<String, Object> param = new HashMap<>();
     param.put("pageNum", pageNum);
     param.put("pageSize", pageSize);
@@ -59,6 +63,7 @@ public class TagController {
   @PostMapping("tag")
   @ResponseBody
   public Result batchInsertTags(@RequestParam("names[]") String[] names) {
+    log.debug("Post->/amdin/tag");
     if (tagService.batchInsertTagByName(Arrays.asList(names)) > 0) {
       return ResultGenerator.generateSuccessResult("标签添加成功");
     } else {
@@ -69,6 +74,7 @@ public class TagController {
   @DeleteMapping("tag")
   @ResponseBody
   public Result batchDeleteTagById(@RequestParam("ids[]") Integer[] ids) {
+    log.debug("Delete->/amdin/tag");
     if (tagService.batchDeleteTagById(Arrays.asList(ids)) > 0) {
       return ResultGenerator.generateSuccessResult("标签删除成功");
     } else {

@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -57,7 +59,7 @@ public class ArticleServiceImpl implements ArticleService {
   @Override
   @Transactional
   public int insertArticle(ArticleDetail articleDetail) {
-    if(articleMapper.selectArticleByTitile(articleDetail.getTitle())!=null){
+    if (articleMapper.selectArticleByTitile(articleDetail.getTitle()) != null) {
       return 0;
     }
     String tagNames = articleDetail.getTagNames();
@@ -74,12 +76,12 @@ public class ArticleServiceImpl implements ArticleService {
     List<String> tagNameList = new ArrayList<>();
 
     for (String name : nameTags) {
-      if(tagMapper.selectTagByName(name)==null){
+      if (tagMapper.selectTagByName(name) == null) {
         tagNameList.add(name);
       }
     }
     //批量插入tag
-    if(!tagNameList.isEmpty()){
+    if (!tagNameList.isEmpty()) {
       tagMapper.batchInsertTagByName(tagNameList);
     }
 
@@ -104,8 +106,8 @@ public class ArticleServiceImpl implements ArticleService {
   @Transactional
   public int updateArticleById(ArticleDetail articleDetail) {
     //标题被修改时，进一步判断库中是否同名
-    if(!articleDetail.getTitle().equals(articleMapper.selectArticleById(articleDetail.getId()).getTitle())
-        && articleMapper.selectArticleByTitile(articleDetail.getTitle())!=null){
+    if (!articleDetail.getTitle().equals(articleMapper.selectArticleById(articleDetail.getId()).getTitle())
+            && articleMapper.selectArticleByTitile(articleDetail.getTitle()) != null) {
       return 0;
     }
     String tagNames = articleDetail.getTagNames();
@@ -128,7 +130,7 @@ public class ArticleServiceImpl implements ArticleService {
     List<Tag> oldTags = tagMapper.selectTagsByArticleId(article.getId());
 
     for (String newTagName : newTagNames) {
-      if(tagMapper.selectTagByName(newTagName)==null){
+      if (tagMapper.selectTagByName(newTagName) == null) {
         tagNameList.add(newTagName);
       }
     }
@@ -136,7 +138,7 @@ public class ArticleServiceImpl implements ArticleService {
     // 被删除的tag
     List<Integer> deleteTagList = new ArrayList<>();
     for (Tag tag : oldTags) {
-      if(tagNames.indexOf(tag.getName())==-1 && articleTagMapper.selectArticleIdByTagId(tag.getId()).size()==1){
+      if (tagNames.indexOf(tag.getName()) == -1 && articleTagMapper.selectArticleIdByTagId(tag.getId()).size() == 1) {
         deleteTagList.add(tag.getId());
       }
     }
@@ -145,12 +147,12 @@ public class ArticleServiceImpl implements ArticleService {
     articleTagMapper.DeleteArticleTagByArticleId(article.getId());
 
     //批量插入新tag
-    if(tagNameList.size()>0){
+    if (tagNameList.size() > 0) {
       tagMapper.batchInsertTagByName(tagNameList);
     }
 
     //批量删除无关联tag
-    if(deleteTagList.size()>0){
+    if (deleteTagList.size() > 0) {
       tagMapper.batchDeleteTagById(deleteTagList);
     }
 
@@ -175,15 +177,15 @@ public class ArticleServiceImpl implements ArticleService {
   }
 
   @Override
+  @Transactional
   public int batchDeleteArticleById(Integer[] ids) {
     int i = articleMapper.batchDeleteArticleById(ids);
-
     List<Integer> tagIdList = new ArrayList<>();
     List<Tag> tags = tagMapper.selectTags();
     //删除article后,剩下的article-tag映射
     List<Integer> tagIds = articleTagMapper.selectTagIds();
     for (Tag tag : tags) {
-      if(!tagIds.contains(tag.getId())){
+      if (!tagIds.contains(tag.getId())) {
         tagIdList.add(tag.getId());
       }
     }

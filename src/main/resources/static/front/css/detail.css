@@ -90,105 +90,33 @@
     border-radius: 10px;
 }
 
-/*.right*/
-@media screen and (max-width: 800px) {
-    .right {
-        display: none;
-    }
+.toc-name {
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    font-size: 18px;
+    letter-spacing: 18px;
+    color: rgb(98, 100, 97);
 }
 
-@media screen and (max-width: 800px) {
-    .container {
-        margin-top: 0;
-    }
+.toc-container {
+    border-radius: 10px;
+    /*box-shadow: 0 0 10px 1px rgb(61, 70, 69);*/
+    background-color: #ffffff;
 }
 
-.left {
+.main {
     flex: 1;
-    padding-top: 10px;
     overflow: hidden;
-    margin-right: 10px;
-    padding-left: 10px;
+    padding: 10px;
     background-color: white;
     border-radius: 10px;
 }
 
-.right {
-    width: 330px;
-    padding: 10px;
-}
-
-.right .sort {
-    padding: 20px 5px;
-    min-height: 200px;
-    position: relative;
-    border-radius: 10px;
-    /*box-shadow: 0 0 10px 1px rgb(61, 70, 69);*/
-    margin-bottom: 20px;
-    background-color: #fff;
-}
-
-.right .item-content {
-    margin: 5px 10px;
-}
-
-.right .tag-item {
-    color: white;
-    margin: 8px 6px 0 0;
-    padding: 3px;
-    font-size: small;
+#toTop {
+    width: 0;
+    position: fixed;
+    bottom: 105px;
+    right: 3%;
     cursor: pointer;
-    display: inline-block;
-    box-shadow: 0 0 3px rgb(32, 32, 34);
-    text-decoration: none;
-}
-
-.right .tag-item:hover {
-    transform: scale(1.05);
-}
-
-.right .item-name {
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgb(51, 131, 44);
-    margin-bottom: 10px;
-    color: rgb(98, 100, 97);
-}
-
-.right .recent-item {
-    color: rgb(230, 235, 233);
-    margin-top: 5px;
-    font-size: 15px;
-    cursor: pointer;
-    background-color: rgb(3, 146, 146);
-    opacity: .8;
-    padding: 5px 5px;
-    box-shadow: 0 0 3px gray;
-    text-align: center;
-}
-
-.right .recent-item:hover {
-    opacity: 1;
-}
-
-.right .category-wrapper {
-    text-align: left;
-}
-
-.right .category-wrapper a {
-    margin-top: 5px;
-    text-decoration: none;
-    font-size: 15px;
-    padding: 5px 0;
-    width: 145px;
-    display: inline-block;
-    color: aliceblue;
-    background-color: rgb(7, 139, 95);
-    opacity: .7;
-    box-shadow: 0 0 3px rgb(32, 32, 34);
-    margin-right: 5px;
-    text-align: center;
-}
-
-.right .category-wrapper a:hover {
-    opacity: 1;
 }

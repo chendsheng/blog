@@ -48,24 +48,24 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="admin:${admins}">
+                            <tr th:each="user:${users}">
                                 <td>
-                                    <input type="checkbox" name="checkbox" th:id="${admin.id}"
-                                           th:username="${admin.name}" th:password="${admin.password}"
-                                           th:role="${admin.role}">
+                                    <input type="checkbox" name="checkbox" th:id="${user.id}"
+                                           th:username="${user.name}" th:password="${user.password}"
+                                           th:role="${user.role}">
                                 </td>
                                 <td>
-                                    <img th:src="${admin.photo==null}?@{/admin/img/user/favicon.ico}:@{${admin.photo}}">
+                                    <img th:src="${user.photo==null}?@{/admin/img/user/favicon.ico}:@{${user.photo}}">
                                 </td>
                                 <td>
-                                    <span th:text="${admin.name}" class="d-inline-block"></span>
+                                    <span th:text="${user.name}" class="d-inline-block"></span>
                                 </td>
                                 <td>
-                                    <span th:text="${admin.role==null}?'默认':${admin.role}"
+                                    <span th:text="${user.role==null}?'默认':${user.role}"
                                           class="d-inline-block"></span>
                                 </td>
                                 <td>
-                                    <span th:text="${admin.createTime.toLocalDate()}+'   '+${admin.createTime.toLocalTime()}"
+                                    <span th:text="${user.createTime.toLocalDate()}+'   '+${user.createTime.toLocalTime()}"
                                           class="d-inline-block"></span>
                                 </td>
                             </tr>
@@ -78,7 +78,7 @@
                 <h5 class="title">链接</h5>
 
                 <div class="body">
-                    备案号: <span>皖ICP备2021013276号-1</span>
+                    备案号: <span th:text="${icp}"></span>
                 </div>
             </div>
         </div>

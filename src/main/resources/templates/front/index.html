@@ -22,6 +22,7 @@
                 <a th:href="@{/}" id="home">主页</a>
                 <a th:href="@{'/?article=all'}" id="note">文章</a>
                 <a th:href="@{/admin}" id="collection">管理</a>
+                <a th:href="@{/space}" id="about">关于我</a>
             </div>
 
             <div class="rnv">
@@ -29,17 +30,10 @@
                     <input type="text" id="search" class="form-input" placeholder="请输入要搜索的文章">
                     <button>搜索</button>
                 </div>
-                <a th:href="@{/space}" id="about">关于我</a>
             </div>
         </div>
     </div>
 </div>
-
-<!--<div class="pic" th:if="${pic!=null}?${pic}:true">
-    <img th:data-src="@{/front/img/index.jpg}" src="" alt="">
-    <div class="down">
-    </div>
-</div>-->
 
 <div class="container" id="container">
     <!-- 内容展示 -->
@@ -125,6 +119,7 @@
         </div>
     </div>
 </div>
+
 <!-- 页脚 -->
 <div th:replace="admin/footer::footer">
     页脚内容

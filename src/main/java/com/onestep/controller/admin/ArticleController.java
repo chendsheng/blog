@@ -38,7 +38,7 @@ public class ArticleController {
           @RequestParam("content") String content,
           @RequestParam(value = "pic", required = false) MultipartFile file,
           @RequestParam(value = "randomPic", required = false) Boolean randomPic) {
-    log.info("POST:/admin/article");
+    log.debug("Post:/admin/article");
     ArticleDetail articleDetail = new ArticleDetail();
     articleDetail.setTitle(title.trim());
     articleDetail.setSummary(summary.trim());
@@ -67,7 +67,7 @@ public class ArticleController {
           @RequestParam("categoryId") Integer categoryId,
           @RequestParam(value = "pic", required = false) MultipartFile file,
           @RequestParam("content") String content) {
-    log.info("PUT:/admin/article");
+    log.debug("Put:/admin/article");
     ArticleDetail articleDetail = new ArticleDetail();
     if (file != null) {
       articleDetail.setPic("/upload/editormdPic/" + Upload.upload(file));
@@ -87,7 +87,7 @@ public class ArticleController {
 
   @GetMapping("article")
   public String select(Model model) {
-    log.info("GET:/admin/article");
+    log.debug("Get:/admin/article");
     Map<String, Object> map = new HashMap<>();
     map.put("pageNum", 1);
     map.put("pageSize", 5);
@@ -103,7 +103,7 @@ public class ArticleController {
   public String select(Model model, @RequestParam(defaultValue = "1") Integer pageNum,
                        @RequestParam(defaultValue = "10") Integer pageSize,
                        @RequestParam(required = false) String search) {
-    log.info("GET:/admin/article/list");
+    log.debug("Get:/admin/article/list");
     Map<String, Object> map = new HashMap<>();
     map.put("pageNum", pageNum);
     map.put("pageSize", pageSize);
@@ -127,7 +127,7 @@ public class ArticleController {
 
   @GetMapping("/article/{articleId}")
   public String update(@PathVariable("articleId") Integer articleId, Model model) {
-    log.info("GET:/admin/article/" + articleId);
+    log.debug("Get:/admin/article/" + articleId);
     ArticleDetail articleDetail = articleService.selectArticleById(articleId);
     Map<String, Object> map = new HashMap<>();
     List<Category> categories = categoryService.selectCategoryList(map);
@@ -139,7 +139,7 @@ public class ArticleController {
   @DeleteMapping("/articles")
   @ResponseBody
   public Result batchDeleteBlogById(@RequestParam("ids[]") Integer[] ids) {
-    log.info("DELETE:/admin/articles");
+    log.debug("Delete:/admin/articles");
     if (articleService.batchDeleteArticleById(ids) > 0) {
       return ResultGenerator.generateSuccessResult("文章删除成功");
     } else {

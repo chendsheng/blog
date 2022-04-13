@@ -8,7 +8,9 @@ import com.onestep.service.TagService;
 import com.onestep.service.UserService;
 import com.onestep.util.Result;
 import com.onestep.util.ResultGenerator;
+import com.onestep.util.SaltMd5Util;
 import com.onestep.util.Upload;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -28,6 +30,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class UserController {
   @Resource
   private UserService userService;
@@ -40,6 +43,7 @@ public class UserController {
 
   @GetMapping({"", "/", "index"})
   public String index(Model model) {
+    log.debug("Get->/amdin");
     int articleCount = articleService.count();
     int categoryCount = categoryService.count();
     int tagCount = tagService.count();
@@ -51,6 +55,7 @@ public class UserController {
 
   @GetMapping("/logout")
   public String logout() {
+    log.debug("Get->/amdin/logout");
     Subject subject = SecurityUtils.getSubject();
     subject.logout();
     return "redirect:/admin/login";
@@ -58,32 +63,35 @@ public class UserController {
 
   @GetMapping("edit")
   public String edit(Model model) {
+    log.debug("Get->/admin/edit");
     List<Category> categories = categoryService.selectCategories();
-    model.addAttribute("categories", categories)
-            .addAttribute("user", SecurityUtils.getSubject().getSession().getAttribute("user"));
+    model.addAttribute("categories", categories);
     return "admin/edit";
   }
 
   @GetMapping("system")
   public String system(Model model) {
+    log.debug("Get->/admin/system");
     List<User> users = userService.selectUsers();
-    model.addAttribute("users", users)
-            .addAttribute("user", SecurityUtils.getSubject().getSession().getAttribute("user"));
+    model.addAttribute("users", users);
     return "admin/system";
   }
 
   @GetMapping("/side")
   public String side() {
+    log.debug("Get->/admin/side");
     return "admin/siderbar";
   }
 
   @GetMapping("/login")
   public String login() {
+    log.debug("Get->/admin/login");
     return "admin/login";
   }
 
   @PostMapping("/login")
   public String login(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password, @RequestParam(value = "remember", required = false) Boolean rememberMe, Model model) {
+    log.debug("Post->/admin/login");
     if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
       model.addAttribute("message", "请输入用户名或密码");
       return "admin/login";
@@ -97,9 +105,10 @@ public class UserController {
 
     try {
       subject.login(token);
-      session.setAttribute("user", subject.getPrincipal());
+      session.setAttribute("user", userService.selectUser(username));
       return "redirect:/admin/index";
     } catch (Exception e) {
+      System.out.println(e);
       model.addAttribute("message", "用户名或密码不正确");
       return "admin/login";
     }
@@ -108,12 +117,14 @@ public class UserController {
   @ResponseBody
   @GetMapping("/list")
   public List<User> queryAllUser() {
+    log.debug("Get->/admin/list");
     return userService.selectUsers();
   }
 
   @ResponseBody
   @PostMapping("/upload/editormdPic")
   public Map editormdPic(HttpServletRequest request, @RequestParam("editormd-image-file") MultipartFile file) {
+    log.debug("Post->/admin/upload/editormdPic");
     Map<String, Object> map = new HashMap<>();
     //request.getContextPath()项目路径  /blog
     map.put("url", request.getContextPath() + "/upload/editormdPic/" + Upload.upload(file));
@@ -128,10 +139,13 @@ public class UserController {
                      @RequestParam("password") String password,
                      @RequestParam(value = "role", required = false) String role,
                      @RequestParam(value = "photo", required = false) MultipartFile photo) {
+    log.debug("Post->/admin/user");
+    String salt = SaltMd5Util.createSalt();
     User user = new User();
+    user.setId(salt);
     user.setName(name.trim());
-    user.setPassword(password.trim());
-    if (!"".equals(role)) {
+    user.setPassword(SaltMd5Util.salt(password.trim(), salt));
+    if (!"".equals(role.trim())) {
       user.setRole(role.trim());
     }
     if (!photo.isEmpty()) {
@@ -150,12 +164,13 @@ public class UserController {
                      @RequestParam("password") String password,
                      @RequestParam("role") String role,
                      @RequestParam("photo") MultipartFile photo,
-                     @RequestParam("id") Integer id) {
+                     @RequestParam("id") String id) {
+    log.debug("Put->/admin/user");
     User user = new User();
     user.setId(id);
     user.setName(name.trim());
-    user.setPassword(password.trim());
-    if (!"".equals(role)) {
+    user.setPassword(SaltMd5Util.salt(password.trim(), id));
+    if (!"".equals(role.trim())) {
       user.setRole(role.trim());
     }
     if (!photo.isEmpty()) {
@@ -171,6 +186,7 @@ public class UserController {
   @DeleteMapping("/user")
   @ResponseBody
   public Result user(@RequestParam("ids[]") Integer[] ids) {
+    log.debug("Delete->/admin/user");
     if (userService.batchDeleteUserbyIds(ids) > 0) {
       return ResultGenerator.generateSuccessResult("用户删除成功");
     } else {

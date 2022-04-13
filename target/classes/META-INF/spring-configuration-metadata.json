@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "iconfig",
+      "type": "com.onestep.config.CustomizeConfiguration",
+      "sourceType": "com.onestep.config.CustomizeConfiguration"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

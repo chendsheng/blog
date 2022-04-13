@@ -23,12 +23,12 @@ body {
 }
 
 .nav {
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
+    padding: 10px 10px 0 10px;
     height: 50px;
     display: flex;
     justify-content: space-between;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .nav a {
@@ -39,6 +39,10 @@ body {
     text-decoration: none;
 }
 
+.nav a:first-child {
+    margin-left: 0;
+}
+
 .nav a:hover {
     color: aliceblue;
 }
@@ -47,6 +51,7 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
 
 div.search {
     display: inline-block;
@@ -75,9 +80,6 @@ div.search {
     cursor: pointer;
 }
 
-@media screen and (max-width: 800px) {
-}
-
 .loop img {
     width: 100%;
     height: 300px;
@@ -100,7 +102,7 @@ div.search {
 
 .right {
     width: 330px;
-    padding: 10px;
+    padding: 10px 0 10px 10px;
 }
 
 .right .sort {
@@ -335,7 +337,7 @@ div.search {
     cursor: pointer;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1200px) {
     .down {
         display: none;
     }
@@ -355,17 +357,9 @@ div.search {
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1200px) {
     .right {
         display: none;
     }
 }
 
-.toTop img {
-    width: 25px;
-    position: fixed;
-    bottom: 10%;
-    right: 10%;
-    display: none;
-    cursor: pointer;
-}

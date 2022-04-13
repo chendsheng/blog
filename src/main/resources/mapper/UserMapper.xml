@@ -4,20 +4,29 @@
     <cache/>
 
     <select id="count" resultType="java.lang.Integer">
-        select count(*) from user
+        select count(*)
+        from user
     </select>
     <select id="selectUsers" resultType="user">
-        select * from user
+        select *
+        from user
     </select>
     <select id="selectRole" resultType="java.lang.String">
-        select role from user where name = #{name}
+        select role
+        from user
+        where name = #{name}
     </select>
     <select id="selectUser" resultType="com.onestep.entity.User">
-        select * from user where name = #{name}
+        select *
+        from user
+        where name = #{name}
     </select>
-    <insert id="insertUser"  useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertUser">
         insert into user
         <trim suffix=")" prefix="(" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
             <if test="photo != null">
                 photo,
             </if>
@@ -33,6 +42,9 @@
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
             <if test="photo != null">
                 #{photo},
             </if>

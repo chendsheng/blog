@@ -15,7 +15,36 @@ $(function () {
         tex: true,  // 默认不解析
         flowChart: true,  // 默认不解析
         sequenceDiagram: true,  // 默认不解析
+    })
 
+    let toc = function () {
+        let width = window.innerWidth
+        if (width > 1200) {
+            $('.toc').append($('.markdown-toc-list'))
+            $('.toc-container').css({
+                'width': '300px',
+                "margin-right": '10px',
+                'height': 85 + $('.toc').outerHeight() + 'px'
+            })
+        } else {
+            $('.toc-container').css({'width': 0, "margin": 0})
+            $('#md .markdown-toc').append($('.markdown-toc-list'))
+        }
+        console.log($('.toc').outerHeight())
+    }
+    toc()
+    $(window).resize(toc)
+
+    let toTop = $('#toTop')
+    toTop.click(function () {
+        $(window).scrollTop(0)
+    })
+    $(window).scroll(function () {
+        if ($(document).scrollTop() > 1400) {
+            toTop.css('width', '25px')
+        } else {
+            toTop.css('width', 0)
+        }
     })
 
     //当前分类点击跳转

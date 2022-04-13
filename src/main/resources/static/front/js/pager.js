@@ -87,7 +87,7 @@ $(function () {
         }
     }
 
-    $('#search>button').click(go())
+    $('.search>button').click(go)
     $('.search>input').focus().keydown(function (e) {
         if (e.keyCode == 13) {
             go()

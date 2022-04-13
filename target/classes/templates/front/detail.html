@@ -44,7 +44,11 @@
 <div th:replace="front/index::header"></div>
 
 <div class="container">
-    <div class="left" th:fragment="detail">
+    <div class="markdown-body editormd-html-preview toc-container">
+        <p class="toc-name"><b>目录</b></p>
+        <div class="toc markdown-toc editormd-markdown-toc"></div>
+    </div>
+    <div class="main" th:fragment="detail">
         <div class="toTop">
             <img th:src="@{/front/img/top.png}" alt="">
         </div>
@@ -72,8 +76,11 @@
             <textarea id="myhtml" name="content" th:text="${articleDetail.content}"></textarea>
         </div>
     </div>
-    <div th:replace="front/index::right"></div>
 </div>
+
+<!--回到顶部-->
+<img id="toTop" th:src="@{/front/img/top.png}">
+
 <div th:replace="admin/footer::footer">
     页脚内容
 </div>

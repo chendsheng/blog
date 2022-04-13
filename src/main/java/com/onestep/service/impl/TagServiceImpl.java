@@ -6,6 +6,7 @@ import com.onestep.dao.TagMapper;
 import com.onestep.entity.Tag;
 import com.onestep.service.TagService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -49,25 +50,26 @@ public class TagServiceImpl implements TagService {
   public int batchInsertTagByName(List<String> names) {
     List<String> namesList = new ArrayList<>();
     for (String name : names) {
-      if(tagMapper.selectTagByName(name)==null){
+      if (tagMapper.selectTagByName(name) == null) {
         namesList.add(name);
       }
     }
-    if(namesList.size()>0){
-     return tagMapper.batchInsertTagByName(namesList);
+    if (namesList.size() > 0) {
+      return tagMapper.batchInsertTagByName(namesList);
     }
     return 0;
   }
 
   @Override
+  @Transactional
   public int batchDeleteTagById(List<Integer> tagIds) {
     List<Integer> tagIdList = new ArrayList<>();
     for (Integer tagId : tagIds) {
-      if(articleTagMapper.selectArticleIdByTagId(tagId).size()==0){
+      if (articleTagMapper.selectArticleIdByTagId(tagId).size() == 0) {
         tagIdList.add(tagId);
       }
     }
-    if(tagIdList.size()>0){
+    if (tagIdList.size() > 0) {
       return tagMapper.batchDeleteTagById(tagIdList);
     }
     return 0;

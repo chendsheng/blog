@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
- 
+
 @Controller
 public class FrontController {
   @Resource
@@ -128,6 +128,9 @@ public class FrontController {
   @GetMapping("/detail/{id}")
   public String deltail(Model model, @PathVariable("id") Integer id, HttpServletRequest request) {
     ArticleDetail articleDetail = articleService.selectArticleById(id);
+    if (articleDetail == null) {
+      return "error/4xx";
+    }
     articleDetail.setViews(articleDetail.getViews() == null ? 1 : articleDetail.getViews() + 1);
     articleService.updateArticleViews(articleDetail);
     List<Article> articlesRecent = articleService.seclectRecentArticles();
