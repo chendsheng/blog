@@ -40,7 +40,7 @@ $(function () {
         $(window).scrollTop(0)
     })
     $(window).scroll(function () {
-        if ($(document).scrollTop() > 1400) {
+        if ($(document).scrollTop() > 1200) {
             toTop.css('width', '25px')
         } else {
             toTop.css('width', 0)

@@ -87,6 +87,11 @@ $(function () {
         }
     }
 
+    function top() {
+        document.scrollingElement.scrollTop = 0
+        document.body.scrollTop = 0
+    }
+
     $('.search>button').click(go)
     $('.search>input').focus().keydown(function (e) {
         if (e.keyCode == 13) {
@@ -101,7 +106,7 @@ $(function () {
         if ($(this).text().trim() != "") {
             currentIndex = parseInt($(this).text().trim())
             show($('.blog-wrapper').attr("count"), currentIndex)
-            $('#blogsList').load(realPath + '/list?pageNum=' + $(this).text().trim() + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"))
+            $('#blogsList').load(realPath + '/list?pageNum=' + $(this).text().trim() + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"), top)
         }
     })
 
@@ -109,18 +114,14 @@ $(function () {
     $('#previous').click(function () {
         currentIndex -= 1
         show($('.blog-wrapper').attr("count"), currentIndex)
-        $('#blogsList').load(realPath + '/list?pageNum=' + currentIndex + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"))
+        $('#blogsList').load(realPath + '/list?pageNum=' + currentIndex + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"), top)
     })
 
     //下一页
     $('#next').click(function () {
         currentIndex += 1
         show($('.blog-wrapper').attr("count"), currentIndex)
-        $('#blogsList').load(realPath + '/list?pageNum=' + currentIndex + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"),
-            () => {
-                document.scrollingElement.scrollTop = 0
-                document.body.scrollTop = 0
-            })
+        $('#blogsList').load(realPath + '/list?pageNum=' + currentIndex + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"), top)
     })
 
     //按分类搜索
@@ -129,6 +130,7 @@ $(function () {
         $('#blogsList').load(realPath + '/list?categoryId=' + $(this).attr('categoryId'),
             function () {
                 show($('.blog-wrapper').attr("count"), currentIndex)
+                top()
             })
     })
 
@@ -138,6 +140,7 @@ $(function () {
         $('#blogsList').load(realPath + '/list?tagId=' + $(this).attr('tagId'),
             function () {
                 show($('.blog-wrapper').attr("count"), currentIndex)
+                top()
             })
     })
 

@@ -32,7 +32,7 @@
              article_tag,
              article
         where tag.id = article_tag.tag_id
-          and article.id = #{id}
+          and article.id = article_tag.article_id
           and article_tag.article_id = #{aid}
     </select>
 
@@ -61,11 +61,9 @@
         <if test="column=='category.id' and value!=null">
             and ${column} = #{value}
         </if>
-        <if test="column=='article.id' and value!=null">
-            and ${column} in
-            <foreach collection="value" item="articleId" separator="," close=")" open="(">
-                #{articleId}
-            </foreach>
+        <if test="column=='tag.id' and value!=null">
+            and article.id in
+            (select article_id from article_tag where tag_id = #{value})
         </if>
         <if test="column=='title' and value!='all'">
             and title like concat('%',#{value},'%')

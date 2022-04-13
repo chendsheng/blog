@@ -8,12 +8,12 @@ $(function () {
     let editor = editormd("test-editor", {
         width: "100%",
         height: "650px",
-        path: realPath+'/editormd/lib/',
+        path: realPath + '/editormd/lib/',
         codeFold: true,
 
-        imageUpload : true,
-        imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp","ico"],
-        imageUploadURL : realPath+"/admin/upload/editormdPic",
+        imageUpload: true,
+        imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp", "ico"],
+        imageUploadURL: realPath + "/admin/upload/editormdPic",
 
         //syncScrolling : false,
         saveHTMLToTextarea: true,    // 保存 HTML 到 Textarea
@@ -38,43 +38,43 @@ $(function () {
         // imageUploadURL: "./php/upload.php",
     })
 
-    let pic = $('#pic')
-    let randomPic = $('#randomPic')
-    let id = $('input[name="id"]').eq(0).val()
+    let pic = $('#pic');
+    let randomPic = $('#randomPic');
+    let id = $('input[name="id"]').eq(0).val();
     pic.change(function () {
         if ($(this).val() != "") {
-            randomPic.attr("disabled",true)
-        }else {
-            randomPic.attr("disabled",false)
+            randomPic.attr("disabled", true);
+        } else {
+            randomPic.attr("disabled", false);
         }
     })
 
-    let url = $('#form').attr('action')
+    let url = $('#form').attr('action');
 
     $('#confirm').click(function () {
-        if ($('#category').val()==null || $('#title').val().trim()=="" ||
-            $('#summary').val().trim()=="" ||$('#tags').val().trim()==""||
-            $('#content').val().trim()=="" || (id ==""?(pic.val()=="" && !randomPic.prop('checked')):false)){
-            myalert("提示框","文章必填不可为空")
-        }else {
-            let formData = new FormData($('#form')[0])
-            formData.append("pic",pic[0].files[0])
-            if (!randomPic.attr("disabled")){
-                formData.append("randomPic",randomPic.prop('checked'))
+        if ($('#category').val() == null || $('#title').val().trim() == "" ||
+            $('#summary').val().trim() == "" || $('#tags').val().trim() == "" ||
+            $('#content').val().trim() == "" || (id == "" ? (pic.val() == "" && !randomPic.prop('checked')) : false)) {
+            myalert("提示框", "文章必填不可为空");
+        } else {
+            let formData = new FormData($('#form')[0]);
+            formData.append("pic", pic[0].files[0]);
+            if (!randomPic.attr("disabled")) {
+                formData.append("randomPic", randomPic.prop('checked'));
             }
             $.ajax({
                 url: url,
                 type: 'post',
-                contentType:false,
-                processData:false,
+                contentType: false,
+                processData: false,
                 data: formData,
-                success:function(result){
-                    if (result.code==200){
-                        myalert("提示框",result.message,function () {
-                            window.location.href = realPath + "/admin/edit"
+                success: function (result) {
+                    if (result.code == 200) {
+                        myalert("提示框", result.message, function () {
+                            window.location.href = realPath + "/admin/edit";
                         })
-                    }else {
-                        myalert("提示框",result.message)
+                    } else {
+                        myalert("提示框", result.message);
                     }
 
                 }

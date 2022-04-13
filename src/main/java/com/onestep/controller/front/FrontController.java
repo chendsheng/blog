@@ -10,13 +10,13 @@ import com.onestep.service.ArticleTagService;
 import com.onestep.service.CategoryService;
 import com.onestep.service.TagService;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,36 +85,27 @@ public class FrontController {
     String selectType;
     String selectValue;
 
-
     List<ArticleDetail> articleDetails;
-
     if (tagId != null) {
-      List<Integer> articleIds = articleTagService.selectArticleIdByTagId(tagId);
-      map.put("column", "article.id");
-      map.put("value", articleIds);
+      map.put("column", "tag.id");
+      map.put("value", tagId);
       selectType = "tagId";
       selectValue = tagId + "";
-      articleDetails = articleService.selectArticleList(map);
     } else if (categoryId != null) {
-      selectType = "categoryId";
-      selectValue = categoryId + "";
       map.put("column", "category.id");
       map.put("value", categoryId);
-      articleDetails = articleService.selectArticleList(map);
+      selectType = "categoryId";
+      selectValue = categoryId + "";
     } else if (title != null) {
-      selectType = "title";
-      selectValue = title;
       map.put("column", "title");
       map.put("value", title);
-
-      articleDetails = articleService.selectArticleList(map);
-
+      selectType = "title";
+      selectValue = title;
     } else {
       selectType = null;
       selectValue = null;
-      articleDetails = articleService.selectArticleList(map);
     }
-
+    articleDetails = articleService.selectArticleList(map);
     PageInfo pageInfo = new PageInfo(articleDetails);
 
     model.addAttribute("articleDetails", articleDetails)
@@ -126,22 +117,16 @@ public class FrontController {
   }
 
   @GetMapping("/detail/{id}")
-  public String deltail(Model model, @PathVariable("id") Integer id, HttpServletRequest request) {
+  @Transactional
+  public String deltail(Model model, @PathVariable("id") Integer id) {
     ArticleDetail articleDetail = articleService.selectArticleById(id);
     if (articleDetail == null) {
       return "error/4xx";
     }
     articleDetail.setViews(articleDetail.getViews() == null ? 1 : articleDetail.getViews() + 1);
     articleService.updateArticleViews(articleDetail);
-    List<Article> articlesRecent = articleService.seclectRecentArticles();
-    List<Tag> tags = tagService.selectTags();
-    List<Category> categories = categoryService.selectCategories();
 
-
-    model.addAttribute("articleDetail", articleDetail)
-            .addAttribute("articlesRecent", articlesRecent)
-            .addAttribute("tags", tags)
-            .addAttribute("categories", categories);
+    model.addAttribute("articleDetail", articleDetail);
     return "front/detail";
   }
 

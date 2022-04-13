@@ -107,16 +107,14 @@ public class ArticleController {
     Map<String, Object> map = new HashMap<>();
     map.put("pageNum", pageNum);
     map.put("pageSize", pageSize);
-    List<ArticleDetail> articleDetails;
     if (search == null || "".equals(search.trim())) {
       search = null;
-      articleDetails = articleService.selectArticleList(map);
     } else {
       search = search.trim();
       map.put("column", "title");
       map.put("value", search);
-      articleDetails = articleService.selectArticleList(map);
     }
+    List<ArticleDetail> articleDetails = articleService.selectArticleList(map);
     PageInfo pageInfo = new PageInfo(articleDetails);
 
     model.addAttribute("articleDetails", articleDetails);

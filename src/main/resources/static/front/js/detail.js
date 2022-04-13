@@ -3,7 +3,7 @@ $(function () {
     let pathName = window.document.location.pathname;
     let pos = curWwwPath.indexOf(pathName);
     let localhostPath = curWwwPath.substring(0, pos);
-    let realPath = localhostPath + $('#realPath').attr('href')
+    let realPath = localhostPath + $('#realPath').attr('href');
 
     let myEditor = editormd.markdownToHTML("md", {
         htmlDebode: true,
@@ -18,29 +18,29 @@ $(function () {
     })
 
     let toc = function () {
-        let width = window.innerWidth
+        let width = window.innerWidth;
         if (width > 1200) {
-            $('.toc').append($('.markdown-toc-list'))
+            $('.toc').append($('.markdown-toc-list'));
             $('.toc-container').css({
                 'width': '300px',
                 "margin-right": '10px',
                 'height': 85 + $('.toc').outerHeight() + 'px'
             })
         } else {
-            $('.toc-container').css({'width': 0, "margin": 0})
-            $('#md .markdown-toc').append($('.markdown-toc-list'))
+            $('.toc-container').css({'width': 0, "margin": 0});
+            $('#md .markdown-toc').append($('.markdown-toc-list'));
         }
-        console.log($('.toc').outerHeight())
+        console.log($('.toc').outerHeight());
     }
-    toc()
-    $(window).resize(toc)
+    toc();
+    $(window).resize(toc);
 
-    let toTop = $('#toTop')
+    let toTop = $('#toTop');
     toTop.click(function () {
         $(window).scrollTop(0)
     })
     $(window).scroll(function () {
-        if ($(document).scrollTop() > 1400) {
+        if ($(document).scrollTop() > 1200) {
             toTop.css('width', '25px')
         } else {
             toTop.css('width', 0)
@@ -63,17 +63,17 @@ $(function () {
 
     //input搜素
     function go() {
-        search = $('.search>input').val()
+        search = $('.search>input').val();
         window.location.href = realPath + '?title=' + search.trim()
     }
 
-    $('.search>button').click(go)
+    $('.search>button').click(go);
     $('.search>input').focus().keydown(function (e) {
         if (e.keyCode == 13) {
             go()
         }
     })
-    $('.search>input').blur()
+    $('.search>input').blur();
 
     //按分类搜索
     $('.category-wrapper>a').click(function () {
