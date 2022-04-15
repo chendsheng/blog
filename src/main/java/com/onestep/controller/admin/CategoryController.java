@@ -42,16 +42,14 @@ public class CategoryController {
     Map<String, Object> param = new HashMap<>();
     param.put("pageNum", pageNum);
     param.put("pageSize", pageSize);
-    List<Category> categories;
     if (search == null || "".equals(search.trim())) {
       search = null;
-      categories = categoryService.selectCategoryList(param);
     } else {
       search = search.trim();
       param.put("column", "name");
       param.put("value", search);
-      categories = categoryService.selectCategoryList(param);
     }
+    List<Category> categories = categoryService.selectCategoryList(param);
     PageInfo pageInfo = new PageInfo(categories);
     model.addAttribute("categories", categories);
     model.addAttribute("pageInfo", pageInfo);

@@ -20,8 +20,8 @@ public class UserInfoInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     Subject subject = SecurityUtils.getSubject();
     if (request.getSession().getAttribute("user") == null && subject.isRemembered() && !subject.isAuthenticated()) {
-      log.info("remmberMe登录->sssion中放入user对象");
-      log.info("subject->{}", subject.getPrincipal().toString());
+      log.debug("remmberMe登录->sssion中放入user对象");
+      log.debug("subject->{}", subject.getPrincipal().toString());
       request.getSession().setAttribute("user", userService.selectUser((String) subject.getPrincipal()));
     }
     return true;

@@ -43,16 +43,14 @@ public class TagController {
     Map<String, Object> param = new HashMap<>();
     param.put("pageNum", pageNum);
     param.put("pageSize", pageSize);
-    List<Tag> tags;
     if (search == null || "".equals(search.trim())) {
       search = null;
-      tags = tagService.selectTagList(param);
     } else {
       search = search.trim();
       param.put("column", "name");
       param.put("value", search);
-      tags = tagService.selectTagList(param);
     }
+    List<Tag> tags = tagService.selectTagList(param);
     PageInfo pageInfo = new PageInfo(tags);
     model.addAttribute("tags", tags);
     model.addAttribute("pageInfo", pageInfo);

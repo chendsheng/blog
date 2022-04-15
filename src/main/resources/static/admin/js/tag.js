@@ -13,9 +13,7 @@ $(function () {
     })
 
     //全选或取消
-    updateTag.on('click', '#all', function () {
-        $('input[name="checkbox"]').prop('checked', $('#all').prop('checked'));
-    })
+    updateTag.on('click', 'tr', isSelectd);
 
     //提交
     confirm.click(function () {
@@ -80,13 +78,13 @@ $(function () {
 
     //每页记录数
     updateTag.on('change', '#pageSize', function (e) {
-        updateTag.load(realPath + '/admin/tag/list?pageSize=' + $(this).val() + '&search=' + $('#search').val());
+        updateTag.load(realPath + '/admin/tag/list?pageSize=' + $(this).val() + '&search=' + $('#search').val(), goTop);
     })
 
     //翻页跳转
     updateTag.on('click', '.page a', function (e) {
         e.preventDefault();
-        updateTag.load(localhostPath + $(this).attr('href'));
+        updateTag.load(localhostPath + $(this).attr('href'), goTop);
     })
 
     //搜索

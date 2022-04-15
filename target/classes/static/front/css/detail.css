@@ -66,8 +66,8 @@
     padding: 3px;
     margin-right: 5px;
     border-radius: 2px;
-    background-color: #00000014;
-    color: #000000ba;
+    background-color: #eee;
+    color: rgba(0, 0, 0, 0.73);
     cursor: pointer;
 }
 

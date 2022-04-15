@@ -8,7 +8,6 @@
     <link rel="shortcut icon" th:href="@{/favicon/favicon.ico}">
     <link rel="stylesheet" th:href="@{/editormd/css/editormd.css}"/>
     <link rel="stylesheet" th:href="@{/front/css/header.css}"/>
-    <link rel="stylesheet" th:href="@{/front/css/footer.css}"/>
     <link rel="stylesheet" th:href="@{/front/css/detail.css}"/>
     <script th:src="@{/plugins/jquery.min.js}"></script>
     <script th:src="@{/editormd/lib/flowchart.min.js}"></script>
@@ -80,10 +79,6 @@
 
 <!--回到顶部-->
 <img id="toTop" th:src="@{/front/img/top.png}">
-
-<div th:replace="admin/footer::footer">
-    页脚内容
-</div>
 
 <script th:src="@{/front/js/index.js}"></script>
 <script th:src="@{/front/js/detail.js}"></script>

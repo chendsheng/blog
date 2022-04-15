@@ -293,17 +293,23 @@ div.search {
     font-size: 5px;
 }
 
+.left .blog-item .title {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
 .left .blog-item .blog-title {
     color: rgb(2, 136, 91);
     font-size: 25px;
 }
 
 .left .blog-item .category-name {
+    margin-right: 10px;
     background-color: rgb(192, 33, 33);
-    display: inline-block;
     color: white;
     border-radius: 5px;
-    padding: 4px;
+    padding: 2px;
     font-size: 15px;
     box-shadow: 0 0 2px rgb(92, 3, 3);
 }

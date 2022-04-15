@@ -27,9 +27,7 @@ $(function () {
     })
 
     //全选或取消
-    all.click(function () {
-        $('input[name="checkbox"]').prop('checked', $('#all').prop('checked'));
-    })
+    $('tr').click(isSelectd);
 
     //更新
     update.click(function () {

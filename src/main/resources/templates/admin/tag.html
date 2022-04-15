@@ -8,7 +8,7 @@
 <link rel="stylesheet" th:href="@{/plugins/jquery.tagsinput.min.css}">
 
 <body>
-<div class="h-100 d-flex">
+<div class="d-flex">
     <div th:replace="admin/sider::sider('tag',${session.user})"></div>
 
     <div class="main flex-grow-1">
@@ -48,9 +48,9 @@
                                         <div class="mytable mt-2">
                                             <table class="table table-hover table-bordered text-center">
                                                 <thead>
-                                                <tr class="t-header">
+                                                <tr class="t-header" id="all">
                                                     <th>
-                                                        <input type="checkbox" id="all">
+                                                        <input type="checkbox">
                                                     </th>
                                                     <th>
                                                         <span>标签名称</span>
@@ -86,7 +86,6 @@
                 </div>
             </div>
         </div>
-        <div th:replace="admin/footer::footer"></div>
 
         <!--新增模态框-->
         <div class="modal fade" id="myModal">

@@ -3,11 +3,11 @@ $(function () {
     let pathName = window.document.location.pathname;
     let pos = curWwwPath.indexOf(pathName);
     let localhostPath = curWwwPath.substring(0, pos);
-    let realPath = localhostPath + $('#realPath').attr('href')
+    let realPath = localhostPath + $('#realPath').attr('href');
 
     let show = function (count, currentIndex) {
-        $('.pager ul').show()
-        $('pager ul button').parent().show()
+        $('.pager ul').show();
+        $('pager ul button').parent().show();
         //页码显示
         if (count <= 1) {
             $('.pager ul').hide()
@@ -21,7 +21,7 @@ $(function () {
                 }
             })
         } else {
-            let backNum = count - currentIndex
+            let backNum = count - currentIndex;
             if (currentIndex >= 5 && backNum >= 5) {
                 $('.num button').each((i, ele) => {
                     if (i == 1 || i == 7) {
@@ -65,7 +65,7 @@ $(function () {
             }
         })
 
-        $('.pages>li:first,.pages>li:last').show()
+        $('.pages>li:first,.pages>li:last').show();
         if (currentIndex == 1) {
             $('.pages>li:first').hide()
         }
@@ -73,13 +73,13 @@ $(function () {
             $('.pages>li:last').hide()
         }
     }
-    let currentIndex = 1
-    let search = $('#search')
+    let currentIndex = 1;
+    let search = $('#search');
 
     //搜素
     function go() {
         if (search.val().trim().length > 0) {
-            currentIndex = 1
+            currentIndex = 1;
             $('#blogsList').load(realPath + '/list?title=' + search.val().trim(),
                 function () {
                     show($('.blog-wrapper').attr("count"), 1)
@@ -87,9 +87,10 @@ $(function () {
         }
     }
 
+    //翻页后回到顶部
     function top() {
-        document.scrollingElement.scrollTop = 0
-        document.body.scrollTop = 0
+        document.scrollingElement.scrollTop = 0;
+        document.body.scrollTop = 0;
     }
 
     $('.search>button').click(go)
@@ -98,48 +99,48 @@ $(function () {
             go()
         }
     })
-    $('.search>input').blur()
-    show($('.blog-wrapper').attr("count"), currentIndex)
+    $('.search>input').blur();
+    show($('.blog-wrapper').attr("count"), currentIndex);
 
     //直接跳转页面
     $('.num>button').click(function () {
         if ($(this).text().trim() != "") {
-            currentIndex = parseInt($(this).text().trim())
-            show($('.blog-wrapper').attr("count"), currentIndex)
+            currentIndex = parseInt($(this).text().trim());
+            show($('.blog-wrapper').attr("count"), currentIndex);
             $('#blogsList').load(realPath + '/list?pageNum=' + $(this).text().trim() + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"), top)
         }
     })
 
     //上一页
     $('#previous').click(function () {
-        currentIndex -= 1
-        show($('.blog-wrapper').attr("count"), currentIndex)
+        currentIndex -= 1;
+        show($('.blog-wrapper').attr("count"), currentIndex);
         $('#blogsList').load(realPath + '/list?pageNum=' + currentIndex + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"), top)
     })
 
     //下一页
     $('#next').click(function () {
-        currentIndex += 1
-        show($('.blog-wrapper').attr("count"), currentIndex)
+        currentIndex += 1;
+        show($('.blog-wrapper').attr("count"), currentIndex);
         $('#blogsList').load(realPath + '/list?pageNum=' + currentIndex + '&' + $('.blog-wrapper').attr("selectType") + '=' + $('.blog-wrapper').attr("selectValue"), top)
     })
 
     //按分类搜索
     $('.category-wrapper>a').click(function () {
-        currentIndex = 1
+        currentIndex = 1;
         $('#blogsList').load(realPath + '/list?categoryId=' + $(this).attr('categoryId'),
             function () {
-                show($('.blog-wrapper').attr("count"), currentIndex)
+                show($('.blog-wrapper').attr("count"), currentIndex);
                 top()
             })
     })
 
     //按标签搜索
     $('.tag-wrapper>a').click(function () {
-        currentIndex = 1
+        currentIndex = 1;
         $('#blogsList').load(realPath + '/list?tagId=' + $(this).attr('tagId'),
             function () {
-                show($('.blog-wrapper').attr("count"), currentIndex)
+                show($('.blog-wrapper').attr("count"), currentIndex);
                 top()
             })
     })

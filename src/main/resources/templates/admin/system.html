@@ -5,7 +5,7 @@
 <link rel="stylesheet" th:href="@{/admin/css/common.css}">
 <link rel="stylesheet" th:href="@{/admin/css/system.css}">
 <body>
-<div class="h-100 d-flex">
+<div class="d-flex">
     <div th:replace="admin/sider::sider('system',${session.user})"></div>
 
     <div class="main flex-grow-1">
@@ -29,9 +29,9 @@
                     <div class="user-list mt-2" th:fragment="list" id="list">
                         <table class="table table-hover table-bordered text-center">
                             <thead>
-                            <tr class="t-header">
+                            <tr class="t-header" id="all">
                                 <th>
-                                    <input type="checkbox" id="all">
+                                    <input type="checkbox">
                                 </th>
                                 <th>
                                     <span>头像</span>
@@ -76,13 +76,8 @@
             </div>
             <div class="links mt-5">
                 <h5 class="title">链接</h5>
-
-                <div class="body">
-                    备案号: <span th:text="${icp}"></span>
-                </div>
             </div>
         </div>
-        <div th:replace="admin/footer::footer"></div>
     </div>
 </div>
 

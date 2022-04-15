@@ -9,7 +9,7 @@
 <link rel="stylesheet" th:href="@{/plugins/jquery.tagsinput.min.css}">
 
 <body>
-<div class="h-100 d-flex">
+<div class="d-flex">
     <div th:replace="admin/sider::sider('edit',${session.user})"></div>
 
     <div class="main flex-grow-1">
@@ -108,8 +108,6 @@
                 </div>
             </div>
         </div>
-
-        <div th:replace="admin/footer::footer"></div>
     </div>
 </div>
 

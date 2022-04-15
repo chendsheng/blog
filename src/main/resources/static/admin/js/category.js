@@ -9,10 +9,7 @@ $(function () {
     let updateCategory = $('#updateCategory');
 
     //全选或取消
-    $('#updateCategory').on('click', '#all', function () {
-        let checkbox = $('input[name="checkbox"]');
-        checkbox.prop('checked', $('#all').prop('checked'));
-    })
+    $('#updateCategory').on('click', 'tr', isSelectd);
 
     //新增
     insert.click(function () {
@@ -125,12 +122,12 @@ $(function () {
 
     //翻页跳转
     updateCategory.on('change', '#pageSize', function (e) {
-        updateCategory.load(realPath + '/admin/category/list?pageSize=' + $(this).val() + '&search=' + $('#search').val());
+        updateCategory.load(realPath + '/admin/category/list?pageSize=' + $(this).val() + '&search=' + $('#search').val(), goTop);
     })
 
     updateCategory.on('click', '.page a', function (e) {
         e.preventDefault();
-        updateCategory.load(localhostPath + $(this).attr('href'));
+        updateCategory.load(localhostPath + $(this).attr('href'), goTop);
     })
 
     //搜索

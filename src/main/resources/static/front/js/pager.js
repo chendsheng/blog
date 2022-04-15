@@ -87,6 +87,7 @@ $(function () {
         }
     }
 
+    //翻页后回到顶部
     function top() {
         document.scrollingElement.scrollTop = 0;
         document.body.scrollTop = 0;

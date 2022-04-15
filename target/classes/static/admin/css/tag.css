@@ -1,26 +1,25 @@
-.tag .card .card-body .mytable{
+.tag .card .card-body .mytable {
     border-top: 3px solid #0d82ff;
-    height: 680px;
     overflow: auto;
 }
-.tag .card .card-body{
-    height: 825px;
-}
+
 .tag .operation input {
     transform: translateY(8%);
     width: 100px;
 }
+
 .tag .operation img {
     width: 18px;
     height: 18px;
     vertical-align: sub;
     transform: translateY(-7%);
 }
+
 .tag .operation a {
     margin-right: 5px;
 }
 
-tr>td,tr>th{
+tr > td, tr > th {
     vertical-align: middle;
 }
 

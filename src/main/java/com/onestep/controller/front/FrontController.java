@@ -10,7 +10,6 @@ import com.onestep.service.ArticleTagService;
 import com.onestep.service.CategoryService;
 import com.onestep.service.TagService;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -117,7 +116,6 @@ public class FrontController {
   }
 
   @GetMapping("/detail/{id}")
-  @Transactional
   public String deltail(Model model, @PathVariable("id") Integer id) {
     ArticleDetail articleDetail = articleService.selectArticleById(id);
     if (articleDetail == null) {

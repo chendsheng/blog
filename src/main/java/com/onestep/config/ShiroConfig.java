@@ -6,6 +6,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.Base64;
 import java.util.LinkedHashMap;
@@ -13,7 +14,6 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
-
 
   @Bean
   public MyRealm myAuthRealm() {
@@ -45,7 +45,8 @@ public class ShiroConfig {
   }
 
   @Bean
-  public ShiroFilterFactoryBean factoryBean(DefaultWebSecurityManager securityManager) {
+  // ShiroFilterFactoryBean实现了BeanPostProcessor,导致该类提前加载,被依赖的类也会提前加载,使用@lazy延迟被依赖对象的加载
+  public ShiroFilterFactoryBean factoryBean(@Lazy DefaultWebSecurityManager securityManager) {
     ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
     bean.setSecurityManager(securityManager);
 

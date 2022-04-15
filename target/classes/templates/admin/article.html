@@ -7,11 +7,11 @@
 <link rel="stylesheet" th:href="@{/admin/css/article.css}">
 
 <body>
-<div class="h-100 d-flex">
+<div class="d-flex">
     <div th:replace="admin/sider::sider('article',${session.user})"></div>
 
     <div class="main flex-grow-1">
-        <div class="d-flex flex-column warper">
+        <div class="warper">
             <div th:replace="admin/header::header(${session.user})"></div>
 
             <!--显示内容-->
@@ -50,9 +50,9 @@
                                         <div class="mytable mt-2">
                                             <table class="table table-hover table-bordered text-center">
                                                 <thead>
-                                                <tr class="t-header">
+                                                <tr class="t-header" id="all">
                                                     <th>
-                                                        <input type="checkbox" id="all">
+                                                        <input type="checkbox">
                                                     </th>
                                                     <th>
                                                         <span>标题</span>
@@ -107,8 +107,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div th:replace="admin/page::page('article')">
-                                        </div>
+                                        <div th:replace="admin/page::page('article')"></div>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +116,6 @@
                 </div>
             </div>
         </div>
-        <div th:replace="admin/footer::footer"></div>
     </div>
 </div>
 <script th:src="@{/admin/js/alert.js}"></script>
