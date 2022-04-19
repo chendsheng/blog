@@ -24,7 +24,7 @@ $(function () {
             $('.toc-container').css({
                 'width': '300px',
                 "margin-right": '10px',
-                'height': 85 + $('.toc').outerHeight() + 'px'
+                'height': 120 + $('.toc').outerHeight() + 'px'
             })
         } else {
             $('.toc-container').css({'width': 0, "margin": 0});

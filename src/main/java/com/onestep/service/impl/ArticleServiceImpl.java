@@ -106,8 +106,7 @@ public class ArticleServiceImpl implements ArticleService {
   @Transactional
   public int updateArticleById(ArticleDetail articleDetail) {
     //标题被修改时，进一步判断库中是否同名
-    if (!articleDetail.getTitle().equals(articleMapper.selectArticleById(articleDetail.getId()).getTitle())
-            && articleMapper.selectArticleByTitile(articleDetail.getTitle()) != null) {
+    if (articleMapper.selectArticleByTitile(articleDetail.getTitle()).getId() != articleDetail.getId()) {
       return 0;
     }
     String tagNames = articleDetail.getTagNames();
