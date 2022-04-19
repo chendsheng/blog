@@ -18,6 +18,3 @@ pagehelper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true
-
-iconfig:
-  icp: 备案号88888888888

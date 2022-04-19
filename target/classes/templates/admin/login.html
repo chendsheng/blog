@@ -5,7 +5,7 @@
 <style>
     .card {
         width: 345px;
-        height: 360px;
+        min-heigh: 360px;
         margin: 0 auto;
     }
 
@@ -25,7 +25,6 @@
             <p class="text-center mt-3">welcom back , just enjoy it</p>
             <form class="card-body" th:action="@{/admin/login}" method="post">
                 <div class="form-group">
-                    <p class="msg" th:if="${message!=null}" th:text="${message}"></p>
                     <label for="username">用户名:</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" required>
                 </div>
@@ -33,12 +32,21 @@
                     <label for="pwd">密码:</label>
                     <input type="password" class="form-control" id="pwd" name="password" placeholder="请输入密码" required>
                 </div>
-                <div class="form-check">
+                <div class="form-group">
+                    <label for="verifyCode">验证码:</label>
+                    <div class="d-flex">
+                        <input type="text" class="form-control" id="verifyCode" name="verifyCode" placeholder="请输入验证码"
+                               required>
+                        <img class="ml-3" id="image" th:src="@{/kaptcha}">
+                    </div>
+                </div>
+                <div class="form-check d-flex justify-content-between">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="remember"> 记住我
                     </label>
+                    <span class="msg" th:if="${message!=null}" th:text="${message}"></span>
                 </div>
-                <div class="text-center mt-2">
+                <div class="text-center mt-3">
                     <button type="submit" class="btn btn-primary">登录</button>
                 </div>
             </form>
@@ -49,6 +57,17 @@
     window.onload = function () {
         window.history.replaceState(null, null, window.location.href);
     }
+
+    let image = $('#image')
+    image.click(() => {
+        console.log(image)
+        image.attr("src", image.attr("src").substr(0, image.attr("src").lastIndexOf('a') + 1) + "?num=" + Math.random() * 1000)
+    })
+
+    setTimeout(() => {
+        $('.msg').remove()
+    }, 2000)
+
 </script>
 </body>
 </html>

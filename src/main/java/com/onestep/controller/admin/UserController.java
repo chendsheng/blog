@@ -84,14 +84,19 @@ public class UserController {
   }
 
   @GetMapping("/login")
-  public String login() {
+  public String login(HttpServletRequest request) {
     log.debug("Get->/admin/login");
     return "admin/login";
   }
 
   @PostMapping("/login")
-  public String login(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password, @RequestParam(value = "remember", required = false) Boolean rememberMe, Model model) {
+  public String login(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password,
+                      @RequestParam(value = "remember", required = false) Boolean rememberMe, @RequestParam("verifyCode") String verifyCode, Model model) {
     log.debug("Post->/admin/login");
+    if (verifyCode == null || !verifyCode.equals(session.getAttribute("verifyCode"))) {
+      model.addAttribute("message", "验证码错误");
+      return "admin/login";
+    }
     if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
       model.addAttribute("message", "请输入用户名或密码");
       return "admin/login";
